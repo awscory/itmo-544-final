@@ -1,9 +1,13 @@
 #!/bin/bash
 
 #Step 1 : create instances and run
-declare -a ARRAY
-aws ec2 run-instances --image-id $IMGID --count $INSCNT --instance-type $INSTYPE --key-name $PRIVKEY --security-group-ids $SECGRP --subnet-id $SUBID --associate-public-ip-address --user-data file://EnvSetUp/install-env.sh --debug
-for i in (0..150);do echo -ne '.';sleep 1;done;
+
+aws ec2 run-instances --image-id $1 --count $2 --instance-type $3 --key-name $4 --security-group-ids $5 --subnet-id $6 --associate-public-ip-address --user-data file://EnvSetUp/install-env.sh --debug
+for i in 0..150
+do 
+	echo -ne '.'
+	sleep 1
+done
 
 #Step 2 : Decribe instances 
 aws ec2 describe-instanes  > ./itmo-544-final-launch-log.txt

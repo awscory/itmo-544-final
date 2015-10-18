@@ -12,10 +12,13 @@ done
 
 #Step 2 : Decribe instances 
 declare -a ARRAY
-ARRAY=('aws ec2 describe-instances --filter Name=instance-state-code,Values=16 --output table | grep InstanceId | sed "s/|//g" | tr -d ' ' | sed "s/InstanceId//g"  ')
+ARRAY=(aws ec2 describe-instances --filter Name=instance-state-code,Values=16 --output table | grep InstanceId | sed "s/|//g" | tr -d ' ' | sed "s/InstanceId//g") 
 
-echo ARRAY[0]
-echo ARRAY[1]
+read -a ARRAY
+for i in "${ARRAY[@]}" 
+do 
+	echo $i 
+done 
 
 #Step 3: Create load Balancer
 aws elb create-load-balancer --load-balancer-name $7 --listeners Protocol=HTTP,LoadBalancerPort=80,InstanceProtocol=HTTP,InstancePort=80 --subnets $6 --security-groups $5

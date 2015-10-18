@@ -1,4 +1,5 @@
 #!/bin/bash
+declare -a INSTARRAY
 
 #Step 1 : create instances and run
 
@@ -6,8 +7,8 @@ aws ec2 run-instances --image-id $1 --count $2 --instance-type $3 --key-name $4 
 
 
 #Step 2 : Decribe instances 
-declare -a INSTARRAY
-mapfile -t INSTARRAY <<(aws ec2 describe-instances --filter Name=instance-state-code,Values=16 --output table | grep InstanceId | sed "s/|//g" | tr -d ' ' | sed "s/InstanceId//g") 
+
+mapfile -t INSTARRAY < < (aws ec2 describe-instances --filter Name=instance-state-code,Values=16 --output table | grep InstanceId | sed "s/|//g" | tr -d ' ' | sed "s/InstanceId//g") 
 
 	echo "the output is ${INSTARRAY[@]}" 
 

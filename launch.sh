@@ -41,7 +41,11 @@ echo "load balancer name is $7"
 
 #Step 3a: Configure health check policy for load balancer
 
-aws elb configure-health-check --load-balancer-name $7 --health-check Target=HTTP:80/png,Interval=30,UnhealthyThreshold=2,HealthyThreshold=2,Timeout=3
+aws elb configure-health-check --load-balancer-name $7 --health-check Target=HTTP:80/index.html,Interval=30,UnhealthyThreshold=2,HealthyThreshold=2,Timeout=3
+
+#step 3b: Register Instances to load balancer
+
+aws elb register-instances-with-load-balancer --load-balancer-name $7 --instances ${InstArr[@]} 
 
 
 

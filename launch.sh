@@ -4,7 +4,7 @@ declare -a InstWaitArr
 
 #Step 1 : create instances and run 
 
-aws ec2 run-instances --image-id $1 --count $2 --instance-type $3 --key-name $4 --security-group-ids $5 --subnet-id $6  --iam-instance-profile Name=$8 --associate-public-ip-address --user-data file://EnvSetUp/install-env.sh  
+aws ec2 run-instances --image-id $1 --count $2 --instance-type $3 --key-name $4 --security-group-ids $5 --subnet-id $6  --associate-public-ip-address --user-data file://EnvSetUp/install-env.sh  
 
 for var1 in {0..60}
 do
@@ -46,6 +46,12 @@ aws elb configure-health-check --load-balancer-name $7 --health-check Target=HTT
 #step 3b: Register Instances to load balancer
 
 aws elb register-instances-with-load-balancer --load-balancer-name $7 --instances ${InstArr[@]} 
+
+#Step 3c: create cookie-stickiness policy 
+
+aws elb create-lb-cookie-stickiness-policy --load-balancer-name $7 --policy-name my-duration-cookie-policy --cookie-expiration-period 60
+
+
 
 
 

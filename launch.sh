@@ -41,7 +41,7 @@ echo "load balancer name is $7"
 
 #Step 3a: Configure health check policy for load balancer
 
-aws elb configure-health-check --load-balancer-name $7 --health-check Target=HTTP:80/index.html,Interval=30,UnhealthyThreshold=2,HealthyThreshold=2,Timeout=3
+aws elb configure-health-check --load-balancer-name $7 --health-check Target=HTTP:80/index.php,Interval=30,UnhealthyThreshold=2,HealthyThreshold=2,Timeout=3
 
 #step 3b: Register Instances to load balancer
 
@@ -58,6 +58,10 @@ aws autoscaling create-launch-configuration --launch-configuration-name itmo544-
 
 aws autoscaling create-auto-scaling-group --auto-scaling-group-name itmo-544-extended-auto-scaling-group-2 --launch-configuration-name itmo544-launch-config --load-balancer-names $2  --health-check-type ELB --min-size 1 --max-size 3 --desired-capacity 2 --default-cooldown 600 --health-check-grace-period 120 --vpc-zone-identifier $6 
 
+
+#Step Creating RDS db-subnet-group
+
+aws rds create-db-subnet-group --db-subnet-group-name dbsgnameSN --db-subnet-group-description DBSubnet-groupname-sukanyaN --subnet-ids ---
 
 echo "ALL DONE"
 

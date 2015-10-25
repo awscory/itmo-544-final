@@ -1,6 +1,6 @@
 #!/bin/bash
 
-./cleanup.sh
+./itmo-544-final/cleanup.sh
 
 declare -a InstArr
 declare -a InstWaitArr
@@ -77,7 +77,7 @@ aws rds create-db-instance --db-name itmo544SukanyaMySql --db-instance-identifie
 
 # wait for the DB instance to be available
 echo "waiting for the Db instance to be available"
-aws rds wait db-instance-available --db-instance-identifier itmo-544-SN-db 
+#aws rds wait db-instance-available --db-instance-identifier itmo-544-SN-db 
  
 
 #Create Read replica of the Db instance in the same region
@@ -86,7 +86,7 @@ aws rds create-db-instance-read-replica --db-instance-identifier itmo-544-SN-dbr
 
 # wait for read replica to be available
 echo "waiting for read replica to be available"
-aws rds wait db-instance-available --db-instance-identifier itmo-544-SN-dbreplica
+#aws rds wait db-instance-available --db-instance-identifier itmo-544-SN-dbreplica
 
 echo "ALL DONE"
 

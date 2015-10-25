@@ -1,6 +1,6 @@
 <?php
 require 'vendor/autoload.php';
-
+include_once 'setup.php';
 
 echo $_POST["email"];
 $uploaddir = '/tmp/';

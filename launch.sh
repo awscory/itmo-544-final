@@ -1,4 +1,7 @@
 #!/bin/bash
+
+./cleanup.sh
+
 declare -a InstArr
 declare -a InstWaitArr
 declare -a VPCSubnetArr
@@ -60,7 +63,6 @@ aws autoscaling create-launch-configuration --launch-configuration-name itmo544-
 echo "creating auto scaling group"
 aws autoscaling create-auto-scaling-group --auto-scaling-group-name itmo-544-Sukanya-auto-scaling-group-2 --launch-configuration-name itmo544-launch-config --load-balancer-names $7  --health-check-type ELB --min-size 1 --max-size 3 --desired-capacity 2 --default-cooldown 600 --health-check-grace-period 120 --vpc-zone-identifier $6 
 
-
 #Step Creating RDS db-subnet-group
 echo "creating DB-subnet-group"
 
@@ -76,6 +78,7 @@ aws rds create-db-instance --db-name itmo544SukanyaMySql --db-instance-identifie
 # wait for the DB instance to be available
 echo "waiting for the Db instance to be available"
 aws rds wait db-instance-available --db-instance-identifier itmo-544-SN-db 
+ 
 
 #Create Read replica of the Db instance in the same region
 echo "creating read replica"
@@ -84,7 +87,6 @@ aws rds create-db-instance-read-replica --db-instance-identifier itmo-544-SN-dbr
 # wait for read replica to be available
 echo "waiting for read replica to be available"
 aws rds wait db-instance-available --db-instance-identifier itmo-544-SN-dbreplica
-
 
 echo "ALL DONE"
 

@@ -38,6 +38,10 @@ mapfile -t InstArr < <(aws ec2 describe-instances --filter Name=instance-state-c
 #create VPC
 mapfile -t VpcId < <(aws ec2 create-vpc --cidr-block 10.0.0.0/16 --output table |grep VpcId |sed "s/|//g" | tr -d ' ' | sed "s/VpcId//g")
 
+aws ec2 modify-vpc-attribute --vpc-id $VpcId --enable-dns-support "{\"Value\":true}"
+
+aws ec2 modify-vpc-attribute --vpc-id $VpcId --enable-dns-hostnames "{\"Value\":true}"
+
 echo "VPC created $VpcId"
 
 #create subnet

@@ -35,41 +35,42 @@ aws ec2 wait --region us-west-2b instance-running --instance-ids ${InstWaitArr[@
 mapfile -t InstArr < <(aws ec2 describe-instances --filter Name=instance-state-code,Values=16 --output table | grep InstanceId | sed "s/|//g" | tr -d ' ' | sed "s/InstanceId//g") 
 
 	echo "the output is ${InstArr[@]}" 
-#create VPC
-mapfile -t VpcId < <(aws ec2 create-vpc --cidr-block 10.0.0.0/16 --output table |grep VpcId |sed "s/|//g" | tr -d ' ' | sed "s/VpcId//g")
+#create 
 
-aws ec2 modify-vpc-attribute --vpc-id $VpcId --enable-dns-support "{\"Value\":true}"
+#mapfile -t VpcId < <(aws ec2 create-vpc --cidr-block 10.0.0.0/16 --output table |grep VpcId |sed "s/|//g" | tr -d ' ' | sed "s/VpcId//g")
 
-aws ec2 modify-vpc-attribute --vpc-id $VpcId --enable-dns-hostnames "{\"Value\":true}"
+#aws ec2 modify-vpc-attribute --vpc-id $VpcId --enable-dns-support "{\"Value\":true}"
+
+#aws ec2 modify-vpc-attribute --vpc-id $VpcId --enable-dns-hostnames "{\"Value\":true}"
 
 echo "VPC created $VpcId"
 
 #create subnet
 
-mapfile -t SubnetId < <(aws ec2 create-subnet --vpc-id $VpcId --cidr-block 10.0.0.0/24 --output table |grep SubnetId |sed "s/|//g" | tr -d ' ' | sed "s/SubnetId//g")
+#mapfile -t SubnetId < <(aws ec2 create-subnet --vpc-id $VpcId --cidr-block 10.0.0.0/24 --output table |grep SubnetId |sed "s/|//g" | tr -d ' ' | sed "s/SubnetId//g")
 
 echo "subnet created $SubnetId"
 
 #create Internet gateway
-mapfile -t IntGate < <(aws ec2 create-internet-gateway --output table |grep InternetGatewayId |sed "s/|//g" | tr -d ' ' | sed "s/InternetGatewayId//g")
+#mapfile -t IntGate < <(aws ec2 create-internet-gateway --output table |grep InternetGatewayId |sed "s/|//g" | tr -d ' ' | sed "s/InternetGatewayId//g")
 
 echo "Internet gateway created $IntGate"
 
 #Attach gateway to vpc
-aws ec2 attach-internet-gateway --internet-gateway-id $IntGate --vpc-id $VpcId
+#aws ec2 attach-internet-gateway --internet-gateway-id $IntGate --vpc-id $VpcId
 
 # describe security group id for this vpc
-mapfile -t SgId < <(aws ec2 describe-security-groups --filter "Name=vpc-id,Values=$VpcId" --output table |grep GroupId |sed "s/|//g" | tr -d ' ' | sed "s/GroupId//g")
+#mapfile -t SgId < <(aws ec2 describe-security-groups --filter "Name=vpc-id,Values=$VpcId" --output table |grep GroupId |sed "s/|//g" | tr -d ' ' | sed "s/GroupId//g")
 
 echo "Security group created $SgId"
 
 #Changing the in-bound rules of security group
 #for SSH
-aws ec2 authorize-security-group-ingress --group-id $SgId --protocol tcp --port 22 --cidr 0.0.0.0/0 
+#aws ec2 authorize-security-group-ingress --group-id $SgId --protocol tcp --port 22 --cidr 0.0.0.0/0 
 #For HTTP
-aws ec2 authorize-security-group-ingress --group-id $SgId --protocol tcp --port 80 --cidr 0.0.0.0/0
+#aws ec2 authorize-security-group-ingress --group-id $SgId --protocol tcp --port 80 --cidr 0.0.0.0/0
 #For MYSQL
-aws ec2 authorize-security-group-ingress --group-id $SgId --protocol tcp --port 3306 --cidr 0.0.0.0/0
+#aws ec2 authorize-security-group-ingress --group-id $SgId --protocol tcp --port 3306 --cidr 0.0.0.0/0
 
 #Step 3: Create load Balancer
 echo "creating load balancer"
@@ -100,7 +101,7 @@ echo "creating auto scaling group"
 #Step Creating RDS db-subnet-group
 echo "creating DB-subnet-group"
 
-mapfile -t VPCSubnetArr< <(aws ec2 describe-subnets --filters "Name=vpc-id,Values=vpc-5fbfe03a" --output table |grep SubnetId | sed "s/|//g" | tr -d ' ' | sed "s/SubnetId//g")
+mapfile -t VPCSubnetArr< <(aws ec2 describe-subnets --filters "Name=vpc-id,Values=vpc-861d43e3" --output table |grep SubnetId | sed "s/|//g" | tr -d ' ' | sed "s/SubnetId//g")
 
 aws rds create-db-subnet-group --db-subnet-group-name dbsgnameSN --db-subnet-group-description DBSubnet-groupname-sukanyaN --subnet-ids ${VPCSubnetArr[@]}
 
@@ -121,7 +122,6 @@ echo "creating read replica"
 # wait for read replica to be available
 echo "waiting for read replica to be available"
 #aws rds wait db-instance-available --db-instance-identifier itmo-544-SN-dbreplica
-
 
 php ./itmo-544-final/setup.php
 

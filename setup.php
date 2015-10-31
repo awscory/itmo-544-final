@@ -1,6 +1,11 @@
+<!DOCTYPE html>
+<html>
+<body>
 <?php
-//conection: 
-
+$rds = new Aws\Rds\RdsClient([
+    'version' => 'latest',
+    'region'  => 'us-east-1'
+]);
 $result = $rds->describeDBInstances([
     'DBInstanceIdentifier' => 'itmo-544-SN-db',
 ]);
@@ -9,7 +14,7 @@ $endpoint = $result['DBInstances'][0]['Endpoint']['Address'];
 print "============\n". $endpoint . "================\n";
 
 echo "Try Connecting the DB"; 
-$link = mysqli_connect("itmo-544-SN-db","SukanyaN","SukanyaNDB",TRUE) or die("Error " . mysqli_error($link)); 
+$link = mysqli_connect("itmo-544-SN-db","SukanyaN","SukanyaNDB","items") or die("Error " . mysqli_error($link)); 
 
 echo "Here is the result: " . $link;
 
@@ -30,4 +35,9 @@ CreationTime  Timestamp
 
 $con->query($sql);
 
+echo "done";
+
 ?>
+
+</body>
+</html>

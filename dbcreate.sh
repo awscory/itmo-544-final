@@ -2,7 +2,7 @@
 
 #Step Create DB instance
 echo "Creating DB instance"
-result= aws rds create-db-instance --db-name itmo544SukanyaMySql --db-instance-identifier itmo-544-SN-db --allocated-storage 20 --db-instance-class db.t1.micro --engine MYSQL --master-username SukanyaN --master-user-password SukanyaNDB --vpc-security-group-ids $5 --availability-zone us-west-2b  --db-subnet-group-name dbsgnameSN
+result= aws rds create-db-instance --db-name itmo544SukanyaMySql --db-instance-identifier itmo-544-SN-db --allocated-storage 20 --db-instance-class db.t1.micro --engine MYSQL --master-username SukanyaN --master-user-password SukanyaNDB --vpc-security-group-ids $1 --availability-zone us-west-2b  --db-subnet-group-name dbsgnameSN
 
 # wait for the DB instance to be available
 echo "waiting for the Db instance to be available"

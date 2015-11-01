@@ -15,7 +15,7 @@ print "============\n". $endpoint . "================\n";*/
 $endpoint = $argv[1];
 
 echo "Try Connecting the DB"; 
-$link = mysqli_connect($endpoint,"SukanyaN","SukanyaNDB","items") or die("Error " . mysqli_error($link)); 
+$link = mysqli_connect($endpoint,"SukanyaN","SukanyaNDB","itmo544SukanyaMySql") or die("Error " . mysqli_error($link)); 
 
 echo "Here is the result: " . $link;
 

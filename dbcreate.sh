@@ -20,7 +20,7 @@ echo "waiting for read replica to be available"
 echo "============\n". $result . "================";
 
 echo "begin database";
-link= mysqli_connect($result,"SukanyaN","SukanyaNDB","items") or die("Error ". mysqli_error($link));
+mapfile -t link < <mysqli_connect($result,"SukanyaN","SukanyaNDB","items") or die("Error ". mysqli_error($link));
 
 echo "LInk is $link" 
 

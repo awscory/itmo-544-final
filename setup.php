@@ -14,7 +14,7 @@ $endpoint = $result['DBInstances'][0]['Endpoint']['Address'];
 print "============\n". $endpoint . "================\n";
 
 echo "Try Connecting the DB"; 
-$link = mysqli_connect("itmo-544-SN-db","SukanyaN","SukanyaNDB","items") or die("Error " . mysqli_error($link)); 
+$link = mysqli_connect($endpoint,"SukanyaN","SukanyaNDB","items") or die("Error " . mysqli_error($link)); 
 
 echo "Here is the result: " . $link;
 

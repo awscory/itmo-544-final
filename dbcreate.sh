@@ -17,13 +17,15 @@ echo "creating read replica"
 echo "waiting for read replica to be available"
 #aws rds wait db-instance-available --db-instance-identifier itmo-544-SN-dbreplica
 
+echo "result here $result"
+
 #get DB endpoint
-$endpoint = $result['DBInstances'][0]['Endpoint']['Address']
+endpoint= $result ['DBInstances']['Endpoint']['Address']
 
 echo "============\n". $endpoint . "================";
 
 echo "begin database";
-$link = mysqli_connect($endpoint,"SukanyaN","SukanyaNDB","items") or die("Error ". mysqli_error($link));
+link= mysqli_connect($endpoint,"SukanyaN","SukanyaNDB","items") or die("Error ". mysqli_error($link));
 
 echo "LInk is $link" 
 

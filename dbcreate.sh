@@ -2,11 +2,11 @@
 
 #Step Create DB instance
 echo "Creating DB instance"
-result= aws rds create-db-instance --db-name itmo544SukanyaMySql --db-instance-identifier itmo-544-SN-db --allocated-storage 20 --db-instance-class db.t1.micro --engine MYSQL --master-username SukanyaN --master-user-password SukanyaNDB --vpc-security-group-ids $1 --availability-zone us-west-2b  --db-subnet-group-name dbsgnameSN
+mapfile -t result < <(aws rds describe-db-instances --db-instance-identifier itmo-544-SN-db --output table | grep Address | sed "s/|//g" | tr -d ' ' | sed "s/Address//g")
 
 # wait for the DB instance to be available
 echo "waiting for the Db instance to be available"
-aws rds wait db-instance-available --db-instance-identifier itmo-544-SN-db 
+#aws rds wait db-instance-available --db-instance-identifier itmo-544-SN-db 
  
 echo "DB instance wait over. It should be Available "
 #Create Read replica of the Db instance in the same region
@@ -17,15 +17,10 @@ echo "creating read replica"
 echo "waiting for read replica to be available"
 #aws rds wait db-instance-available --db-instance-identifier itmo-544-SN-dbreplica
 
-echo "result here $result"
-
-#get DB endpoint
-endpoint= $result ['DBInstances']['Endpoint']['Address']
-
-echo "============\n". $endpoint . "================";
+echo "============\n". $result . "================";
 
 echo "begin database";
-link= mysqli_connect($endpoint,"SukanyaN","SukanyaNDB","items") or die("Error ". mysqli_error($link));
+link= mysqli_connect($result,"SukanyaN","SukanyaNDB","items") or die("Error ". mysqli_error($link));
 
 echo "LInk is $link" 
 

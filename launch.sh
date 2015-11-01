@@ -35,6 +35,7 @@ aws ec2 wait --region us-west-2b instance-running --instance-ids ${InstWaitArr[@
 mapfile -t InstArr < <(aws ec2 describe-instances --filter Name=instance-state-code,Values=16 --output table | grep InstanceId | sed "s/|//g" | tr -d ' ' | sed "s/InstanceId//g") 
 
 	echo "the output is ${InstArr[@]}" 
+
 #create 
 
 #mapfile -t VpcId < <(aws ec2 create-vpc --cidr-block 10.0.0.0/16 --output table |grep VpcId |sed "s/|//g" | tr -d ' ' | sed "s/VpcId//g")
@@ -108,7 +109,7 @@ aws rds create-db-subnet-group --db-subnet-group-name dbsgnameSN --db-subnet-gro
 
 #Step Create DB instance
 echo "Creating DB instance"
-$result= aws rds create-db-instance --db-name itmo544SukanyaMySql --db-instance-identifier itmo-544-SN-db --allocated-storage 20 --db-instance-class db.t1.micro --engine MYSQL --master-username SukanyaN --master-user-password SukanyaNDB --vpc-security-group-ids $5 --availability-zone us-west-2b  --db-subnet-group-name dbsgnameSN
+result= aws rds create-db-instance --db-name itmo544SukanyaMySql --db-instance-identifier itmo-544-SN-db --allocated-storage 20 --db-instance-class db.t1.micro --engine MYSQL --master-username SukanyaN --master-user-password SukanyaNDB --vpc-security-group-ids $5 --availability-zone us-west-2b  --db-subnet-group-name dbsgnameSN
 
 # wait for the DB instance to be available
 echo "waiting for the Db instance to be available"

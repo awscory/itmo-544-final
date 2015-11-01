@@ -1,4 +1,7 @@
 #!/bin/bash
+
+./itmo-544-final/cleanup.sh
+
 declare -a InstArr
 declare -a InstWaitArr
 declare -a VPCSubnetArr
@@ -32,7 +35,42 @@ aws ec2 wait --region us-west-2b instance-running --instance-ids ${InstWaitArr[@
 mapfile -t InstArr < <(aws ec2 describe-instances --filter Name=instance-state-code,Values=16 --output table | grep InstanceId | sed "s/|//g" | tr -d ' ' | sed "s/InstanceId//g") 
 
 	echo "the output is ${InstArr[@]}" 
+#create 
 
+#mapfile -t VpcId < <(aws ec2 create-vpc --cidr-block 10.0.0.0/16 --output table |grep VpcId |sed "s/|//g" | tr -d ' ' | sed "s/VpcId//g")
+
+#aws ec2 modify-vpc-attribute --vpc-id $VpcId --enable-dns-support "{\"Value\":true}"
+
+#aws ec2 modify-vpc-attribute --vpc-id $VpcId --enable-dns-hostnames "{\"Value\":true}"
+
+echo "VPC created $VpcId"
+
+#create subnet
+
+#mapfile -t SubnetId < <(aws ec2 create-subnet --vpc-id $VpcId --cidr-block 10.0.0.0/24 --output table |grep SubnetId |sed "s/|//g" | tr -d ' ' | sed "s/SubnetId//g")
+
+echo "subnet created $SubnetId"
+
+#create Internet gateway
+#mapfile -t IntGate < <(aws ec2 create-internet-gateway --output table |grep InternetGatewayId |sed "s/|//g" | tr -d ' ' | sed "s/InternetGatewayId//g")
+
+echo "Internet gateway created $IntGate"
+
+#Attach gateway to vpc
+#aws ec2 attach-internet-gateway --internet-gateway-id $IntGate --vpc-id $VpcId
+
+# describe security group id for this vpc
+#mapfile -t SgId < <(aws ec2 describe-security-groups --filter "Name=vpc-id,Values=$VpcId" --output table |grep GroupId |sed "s/|//g" | tr -d ' ' | sed "s/GroupId//g")
+
+echo "Security group created $SgId"
+
+#Changing the in-bound rules of security group
+#for SSH
+#aws ec2 authorize-security-group-ingress --group-id $SgId --protocol tcp --port 22 --cidr 0.0.0.0/0 
+#For HTTP
+#aws ec2 authorize-security-group-ingress --group-id $SgId --protocol tcp --port 80 --cidr 0.0.0.0/0
+#For MYSQL
+#aws ec2 authorize-security-group-ingress --group-id $SgId --protocol tcp --port 3306 --cidr 0.0.0.0/0
 
 #Step 3: Create load Balancer
 echo "creating load balancer"
@@ -55,35 +93,68 @@ aws elb create-lb-cookie-stickiness-policy --load-balancer-name $7 --policy-name
 
 #Step Create Auto scaling group
 echo "creating launch configuration"
-aws autoscaling create-launch-configuration --launch-configuration-name itmo544-launch-config --image-id $1 --key-name $4  --security-groups $5 --instance-type $3 --user-data file://EnvSetUp/install-env.sh --iam-instance-profile $8
+#aws autoscaling create-launch-configuration --launch-configuration-name itmo544-launch-config --image-id $1 --key-name $4  --security-groups $5 --instance-type $3 --user-data file://EnvSetUp/install-env.sh --iam-instance-profile $8
 
 echo "creating auto scaling group"
-aws autoscaling create-auto-scaling-group --auto-scaling-group-name itmo-544-Sukanya-auto-scaling-group-2 --launch-configuration-name itmo544-launch-config --load-balancer-names $7  --health-check-type ELB --min-size 1 --max-size 3 --desired-capacity 2 --default-cooldown 600 --health-check-grace-period 120 --vpc-zone-identifier $6 
+#aws autoscaling create-auto-scaling-group --auto-scaling-group-name itmo-544-Sukanya-auto-scaling-group-2 --launch-configuration-name itmo544-launch-config --load-balancer-names $7  --health-check-type ELB --min-size 1 --max-size 3 --desired-capacity 2 --default-cooldown 600 --health-check-grace-period 120 --vpc-zone-identifier $6 
 
 #Step Creating RDS db-subnet-group
 echo "creating DB-subnet-group"
 
-mapfile -t VPCSubnetArr< <(aws ec2 describe-subnets --filters "Name=vpc-id,Values=vpc-12511077" --output table |grep SubnetId | sed "s/|//g" | tr -d ' ' | sed "s/SubnetId//g")
+mapfile -t VPCSubnetArr< <(aws ec2 describe-subnets --filters "Name=vpc-id,Values=vpc-861d43e3" --output table |grep SubnetId | sed "s/|//g" | tr -d ' ' | sed "s/SubnetId//g")
 
 aws rds create-db-subnet-group --db-subnet-group-name dbsgnameSN --db-subnet-group-description DBSubnet-groupname-sukanyaN --subnet-ids ${VPCSubnetArr[@]}
 
 
 #Step Create DB instance
 echo "Creating DB instance"
-aws rds create-db-instance --db-name itmo544SukanyaMySql --db-instance-identifier itmo-544-SN-db --allocated-storage 20 --db-instance-class db.t1.micro --engine MYSQL --master-username SukanyaN --master-user-password SukanyaNDB --vpc-security-group-ids $5 --availability-zone us-west-2b  --db-subnet-group-name dbsgnameSN
+result= aws rds create-db-instance --db-name itmo544SukanyaMySql --db-instance-identifier itmo-544-SN-db --allocated-storage 20 --db-instance-class db.t1.micro --engine MYSQL --master-username SukanyaN --master-user-password SukanyaNDB --vpc-security-group-ids $5 --availability-zone us-west-2b  --db-subnet-group-name dbsgnameSN
 
 # wait for the DB instance to be available
 echo "waiting for the Db instance to be available"
 aws rds wait db-instance-available --db-instance-identifier itmo-544-SN-db 
  
-
+echo "DB instance wait over. It should be Available "
 #Create Read replica of the Db instance in the same region
 echo "creating read replica"
-aws rds create-db-instance-read-replica --db-instance-identifier itmo-544-SN-dbreplica --source-db-instance-identifier itmo-544-SN-db --db-instance-class db.t1.micro --availability-zone us-west-2a
+#aws rds create-db-instance-read-replica --db-instance-identifier itmo-544-SN-dbreplica --source-db-instance-identifier itmo-544-SN-db --db-instance-cass db.t1.micro --availability-zone us-west-2a
 
 # wait for read replica to be available
 echo "waiting for read replica to be available"
-aws rds wait db-instance-available --db-instance-identifier itmo-544-SN-dbreplica
+#aws rds wait db-instance-available --db-instance-identifier itmo-544-SN-dbreplica
+
+#get DB endpoint
+$endpoint = $result['DBInstances'][0]['Endpoint']['Address']
+
+echo "============\n". $endpoint . "================";
+
+echo "begin database";
+$link = mysqli_connect($endpoint,"SukanyaN","SukanyaNDB","items") or die("Error ". mysqli_error($link));
+
+echo "LInk is $link" 
+
+$sql = "CREATE TABLE items 
+(
+ID INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+UName VARCHAR(20),
+Email Varchar(20),
+Phone Varchar(20),
+RawS3Url  Varchar(256),
+FinalS3Url  Varchar(256),
+JpgFileName    Varchar(256),
+Status    TinyInt(3),
+Issubscribed TinyInt(3),
+CreationTime  Timestamp
+)";
+
+$con->query($sql);
+
+echo " table done";
+
+
+#sudo apt-get install php5-cli
+
+#php ./itmo-544-final/setup.php
 
 echo "ALL DONE"
 

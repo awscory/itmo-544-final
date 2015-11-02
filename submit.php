@@ -1,7 +1,7 @@
 <?php
 require 'vendor/autoload.php';
 
-print $_SESSION["email"];
+print $_POST["email"];
 ?>
 
 

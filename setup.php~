@@ -15,10 +15,7 @@ print "============\n". $endpoint . "================\n";*/
 $endpoint = $argv[1];
 
 echo "Try Connecting the DB"; 
-$link = mysqli_connect($endpoint,"SukanyaN","SukanyaNDB","items") or die("Error " . mysqli_error($link)); 
-
-echo "Here is the result: " . $link;
-
+$link = mysqli_connect($endpoint,"SukanyaN","SukanyaNDB","itmo544SNDB",3306) or die("Error " . mysqli_error()); 
 
 $sql = "CREATE TABLE items 
 (
@@ -34,7 +31,17 @@ Issubscribed TinyInt(3),
 CreationTime  Timestamp
 )";
 
-$con->query($sql);
+print($sql);
+
+
+if ($link->query($sql) === TRUE) {
+    echo "Table items created successfully";
+} else {
+    echo "Error creating table: " . $link->error;
+}
+
+$link->close();
+
 
 echo "done";
 

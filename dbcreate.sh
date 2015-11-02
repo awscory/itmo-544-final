@@ -2,7 +2,7 @@
 
 #Step Create DB instance
 echo "Creating DB instance"
-mapfile -t result < <(aws rds describe-db-instances --db-instance-identifier itmo-544-SN-db --output table | grep Address | sed "s/|//g" | tr -d ' ' | sed "s/Address//g")
+mapfile -t result < <(aws rds describe-db-instances --db-instance-identifier itmo-544-sukanya --output table | grep Address | sed "s/|//g" | tr -d ' ' | sed "s/Address//g")
 
 # wait for the DB instance to be available
 echo "waiting for the Db instance to be available"
@@ -19,7 +19,7 @@ echo "waiting for read replica to be available"
 
 echo "============\n". $result . "================";
 
-#sudo apt-get install php5-cli
+sudo apt-get install php5-mysql
 
 php ./itmo-544-final/setup.php $result
 

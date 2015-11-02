@@ -1,5 +1,7 @@
 <?php
 require 'vendor/autoload.php';
+print_r($_POST);
+echo "test"
 ?>
 <!DOCTYPE html>
 <html>
@@ -7,7 +9,7 @@ require 'vendor/autoload.php';
 
 <?php
 // Set session variables
-echo $_SESSION["email"];
+echo $_POST["email"];
 ?>
 
 </body>

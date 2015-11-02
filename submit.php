@@ -1,7 +1,7 @@
 <?php
 require 'vendor/autoload.php';
 print_r($_POST);
-echo "test"
+echo "test";
 ?>
 <!DOCTYPE html>
 <html>

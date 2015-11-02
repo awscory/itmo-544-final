@@ -109,11 +109,11 @@ aws rds create-db-subnet-group --db-subnet-group-name dbsgnameSN --db-subnet-gro
 
 #Step Create DB instance
 echo "Creating DB instance"
-result= aws rds create-db-instance --db-name itmo544SukanyaMySql --db-instance-identifier itmo-544-SN-db --allocated-storage 20 --db-instance-class db.t1.micro --engine MYSQL --master-username SukanyaN --master-user-password SukanyaNDB --vpc-security-group-ids $5 --availability-zone us-west-2b  --db-subnet-group-name dbsgnameSN --publicly-accessible
+result= aws rds create-db-instance --db-name itmo544SNDB --db-instance-identifier itmo-544-sukanya --allocated-storage 20 --db-instance-class db.t1.micro --engine MYSQL --master-username SukanyaN --master-user-password SukanyaNDB --vpc-security-group-ids $5 --availability-zone us-west-2b  --db-subnet-group-name dbsgnameSN --publicly-accessible
 
 # wait for the DB instance to be available
 echo "waiting for the Db instance to be available"
-aws rds wait db-instance-available --db-instance-identifier itmo-544-SN-db 
+aws rds wait db-instance-available --db-instance-identifier itmo-544-sukanya
  
 echo "DB instance wait over. It should be Available "
 #Create Read replica of the Db instance in the same region

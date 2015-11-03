@@ -9,6 +9,7 @@ else {
 echo "Post data is empty";
 }
 print_r ($_POST);
+/*
 $uploaddir = '/tmp/';
 $uploadfile = $uploaddir. basename($_FILES['userfile']['name']);
 if (move_uploaded_file($_FILES['userfile']['tmp_name'], $uploadfile)) {
@@ -83,7 +84,7 @@ $sql1 = "SELECT * FROM items";
 $result = mysqli_query($link, $sql1);
 print "Result set order...\n";
 
-$link->close();
+$link->close();*/
 ?>
 
  

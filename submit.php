@@ -46,7 +46,7 @@ $result = $s3->createBucket([
 $result = $s3->waitUntil('BucketExists',array('Bucket' => $bucket));
 
 echo "/n/n bucket creation done"
-/*
+
 $result = $s3->putObject([
     'ACL' => 'public-read',
     'Bucket' => $bucket,
@@ -56,6 +56,9 @@ $result = $s3->putObject([
 ]);  
 $url = $result['ObjectURL'];
 print $url;
+echo "File uploaded to s3 successfully";
+
+/*
 $rds = new Aws\Rds\RdsClient([
     'version' => 'latest',
     'region'  => 'us-east-1'

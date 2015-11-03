@@ -99,7 +99,7 @@ $s3finishedurl = "none";
 $filename = basename($_FILES['userfile']['name']);
 $status =0;
 $issubscribed=0;
-$stmt->bind_param("sssssii",$uname,$email,$phone,$s3rawurl,$s3finishedurl,$filename,$status,$issubscribed);
+$stmt->bind_param($uname,$email,$phone,$s3rawurl,$s3finishedurl,$filename,$status,$issubscribed);
 if (!$stmt->execute()) {
     print "Execute failed: (" . $stmt->errno . ") " . $stmt->error;
 }

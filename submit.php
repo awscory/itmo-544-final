@@ -1,6 +1,6 @@
 <?php
 require 'vendor/autoload.php';
-echo"Submit.php page";
+echo "Submit.php page";
 if(!empty($_POST)){
 echo $_POST['email'];
 echo $_POST['phone'];
@@ -9,6 +9,8 @@ else {
 echo "Post data is empty";
 }
 print_r ($_POST);
+echo $_FILES['userfile'];
+print_r ($_FILES);
 
 if (isset ($_FILES['userfile'])){
 $uploaddir = '/tmp/';

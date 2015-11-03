@@ -17,17 +17,12 @@ if (isset ($_FILES['userfile'])){
 $uploaddir = '/tmp/';
 $uploadfile = $uploaddir. basename($_FILES['userfile']['name']);
 if (move_uploaded_file($_FILES['userfile']['tmp_name'], $uploadfile)) {
-    print "File is valid, and was successfully uploaded.\n";
+    print "File is valid, and was successfully uploaded.\n\n";
 } else {
     print "Possible file upload attack!\n";
 }
-}
-else
-{
 
-print "file not valid ";
-}
-print 'Here is some more debugging info:';
+print "Here is some more debugging info:\n";
 print_r($_FILES);
 
 $s3=new Aws\S3\S3Client([
@@ -45,19 +40,19 @@ $result = $s3->createBucket([
 
 $result = $s3->waitUntil('BucketExists',array('Bucket' => $bucket));
 
-echo "/n/n bucket creation done"
-
+echo "bucket creation done\n"
 $result = $s3->putObject([
-    'ACL' => 'public-read',
+    'ACL'    => 'public-read',
     'Bucket' => $bucket,
-   'Key' => $uploadfile,
-'ContentType' => $_FILES['userfile']['type'],
+    'Key'    => "uploads".$uploadfile,
+    'ContentType' => $_FILES['userfile']['type'],
     'Body'   => fopen($uploadfile, 'r+')
-]);  
+]);
 $url = $result['ObjectURL'];
-print $url;
-echo "File uploaded to s3 successfully";
+echo $url;
+echo "file uploaded to bucket";
 
+}
 /*
 $rds = new Aws\Rds\RdsClient([
     'version' => 'latest',

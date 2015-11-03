@@ -99,9 +99,19 @@ $s3finishedurl = "none";
 $filename = basename($_FILES['userfile']['name']);
 $status =0;
 $issubscribed=0;
-$stmt->bind_param("sssssii",$uname,$email,$phone,$s3rawurl,$s3finishedurl,$filename,$status,$issubscribed);
+if (!$stmt->bind_param("sssssii",$uname,$email,$phone,$s3rawurl,$s3finishedurl,$filename,$status,$issubscribed)){
+echo "binding failed";
+}
+else
+{
+echo "binding success";
+}
 if (!$stmt->execute()) {
     print "Execute failed: (" . $stmt->errno . ") " . $stmt->error;
+}
+else
+{
+echo "execution success";
 }
 printf("%d Row inserted.\n", $stmt->affected_rows);
 

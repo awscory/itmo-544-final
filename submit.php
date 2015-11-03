@@ -75,11 +75,14 @@ echo "endpoint is available";
 
 $link = mysqli_connect($endpoint,"SukanyaN","SukanyaNDB","items",3306) or die("Error " . mysqli_error($link));
 
+print_r($link);
+
 if (mysqli_connect_errno()) {
     printf("Connect failed: %s\n", mysqli_connect_error());
     exit();
 }
-
+echo "connection success";
+/*
 if (!($stmt = $link->prepare("INSERT INTO items (id,Uname,Email,Phone,RawS3Url,FinalS3Url,JpgFileName,status,Issubscribed) VALUES (NULL,?,?,?,?,?,?,?,?)"))) {
     print "Prepare failed: (" . $link->errno . ") " . $link->error;
 }
@@ -87,7 +90,7 @@ else
 {
 print "statement was success"
 }
-/*
+
 $uname = $_POST['username'];
 $email = $_POST['email'];
 $phone = $_POST['phone'];

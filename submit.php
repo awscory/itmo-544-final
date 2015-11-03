@@ -83,8 +83,8 @@ if (mysqli_connect_errno()) {
 }
 echo "connection success";
 
-if (!($stmt = $link->prepare("INSERT INTO items (id,Uname,Email,Phone,RawS3Url,FinalS3Url,JpgFileName,status,Issubscribed) VALUES (NULL,?,?,?,?,?,?,?,?)"))) {
-    print "Prepare failed: (" . $link->errno . ") " . $link->error;
+if (!($stmt = $link->prepare("INSERT INTO items (UName,Email,Phone,RawS3Url,FinalS3Url,JpgFileName,status,Issubscribed) VALUES (?,?,?,?,?,?,?,?)"))) {
+    echo "Prepare failed: (" . $link->errno . ") " . $link->error;
 }
 else
 {

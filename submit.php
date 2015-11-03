@@ -66,8 +66,8 @@ $rds = new Aws\Rds\RdsClient([
 $result = $rds->describeDBInstances(['DBInstanceIdentifier' => 'itmo-544-sukanya']);
 
 echo "No error as of now";
-/*
-$endpoint = $result['DBInstances'][0]['Endpoint']['Address']
+
+$endpoint = $result['DBInstances'][0]['Endpoint']['Address'];
     print "============\n". $endpoint . "================";
 echo "endpoint is available";
 
@@ -77,9 +77,13 @@ if (mysqli_connect_errno()) {
     printf("Connect failed: %s\n", mysqli_connect_error());
     exit();
 }
-
+/*
 if (!($stmt = $link->prepare("INSERT INTO items (id,Uname,Email,Phone,RawS3Url,FinalS3Url,JpgFileName,status,Issubscribed) VALUES (NULL,?,?,?,?,?,?,?,?)"))) {
     print "Prepare failed: (" . $link->errno . ") " . $link->error;
+}
+else
+{
+print "statement was success"
 }
 $uname = $_POST['username'];
 $email = $_POST['email'];

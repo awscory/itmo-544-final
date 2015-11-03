@@ -31,7 +31,7 @@ $s3=new Aws\S3\S3Client([
 ]);
 
 $bucket = uniqid("S3-Sukanya-", false);
-print "Creating bucket named {$bucket}\n";
+print "Creating bucket named {$bucket}";
 $result = $s3->createBucket([
     'ACL' => 'public-read',
     'Bucket' => $bucket
@@ -41,6 +41,8 @@ $result = $s3->createBucket([
 $result = $s3->waitUntil('BucketExists',array('Bucket' => $bucket));
 
 echo "bucket creation done\n"
+}
+/*
 $result = $s3->putObject([
     'ACL'    => 'public-read',
     'Bucket' => $bucket,
@@ -53,7 +55,7 @@ echo $url;
 echo "file uploaded to bucket";
 
 }
-/*
+
 $rds = new Aws\Rds\RdsClient([
     'version' => 'latest',
     'region'  => 'us-east-1'

@@ -35,7 +35,7 @@ $s3=new Aws\S3\S3Client([
     'region'  => 'us-east-1'
 ]);
 
-$bucket = uniqid("S3-Sukanya-", true);
+$bucket = uniqid("S3-Sukanya-", false);
 print "Creating bucket named {$bucket}\n";
 $result = $s3->createBucket([
     'ACL' => 'public-read',
@@ -43,8 +43,10 @@ $result = $s3->createBucket([
 ]);
 
 
-$s3->waitUntil('BucketExists',array('Bucket' => $bucket));
+$result = $s3->waitUntil('BucketExists',array('Bucket' => $bucket));
 
+echo "/n/n bucket creation done"
+/*
 $result = $s3->putObject([
     'ACL' => 'public-read',
     'Bucket' => $bucket,
@@ -94,7 +96,7 @@ $sql1 = "SELECT * FROM items";
 $result = mysqli_query($link, $sql1);
 print "Result set order...\n";
 
-$link->close();
+$link->close();*/
 ?>
 
  

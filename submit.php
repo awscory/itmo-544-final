@@ -106,7 +106,7 @@ if (!$stmt->execute()) {
 printf("%d Row inserted.\n", $stmt->affected_rows);
 
 $stmt->close();
-$sql1 = "SELECT * FROM items";
+$sql1 = "SELECT ID, RawS3URL FROM items";
 $result = mysqli_query($link, $sql1);
 print "Result set order...\n";
 

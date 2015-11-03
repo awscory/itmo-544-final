@@ -87,6 +87,7 @@ else
 {
 print "statement was success"
 }
+/*
 $uname = $_POST['username'];
 $email = $_POST['email'];
 $phone = $_POST['phone'];
@@ -105,7 +106,7 @@ $stmt->close();
 $sql1 = "SELECT * FROM items";
 $result = mysqli_query($link, $sql1);
 print "Result set order...\n";
-
+*/
 $link->close();
 ?>
 

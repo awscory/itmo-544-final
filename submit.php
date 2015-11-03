@@ -110,6 +110,16 @@ $sql1 = "SELECT * FROM items";
 $result = mysqli_query($link, $sql1);
 print "Result set order...\n";
 
+if (mysqli_num_rows($result) > 0) {
+    // output data of each row
+    while($row = mysqli_fetch_assoc($result)) {
+        echo "id: " . $row["ID"]."- RawS3URL" . $row["RawS3URL"]. "<br>";
+    }
+} 
+else {
+    echo "----0 results";
+}
+
 $link->close();
 ?>
 

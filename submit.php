@@ -67,7 +67,7 @@ $result = $rds->describeDBInstances(['DBInstanceIdentifier' => 'itmo-544-sukanya
 
 echo "No error as of now";
 
-echo $result;
+print_r($result);
 
 $endpoint = $result['DBInstances']['Endpoint']['Address'];
     print "============\n". $endpoint . "================";

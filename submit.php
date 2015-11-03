@@ -72,7 +72,7 @@ print_r($result);
 $endpoint = $result['DBInstances']['Endpoint']['Address'];
     print "============\n". $endpoint . "================";
 echo "endpoint is available";
-/*
+
 $link = mysqli_connect($endpoint,"SukanyaN","SukanyaNDB","items",3306) or die("Error " . mysqli_error($link));
 
 if (mysqli_connect_errno()) {
@@ -106,7 +106,7 @@ $sql1 = "SELECT * FROM items";
 $result = mysqli_query($link, $sql1);
 print "Result set order...\n";
 
-$link->close();*/
+$link->close();
 ?>
 
  

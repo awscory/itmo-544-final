@@ -88,7 +88,7 @@ if (!($stmt = $link->prepare("INSERT INTO items (id,Uname,Email,Phone,RawS3Url,F
 }
 else
 {
-print "statement was success"
+echo "statement was success"
 }
 /*
 $uname = $_POST['username'];

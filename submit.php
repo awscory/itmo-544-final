@@ -56,8 +56,8 @@ $result = $s3->putObject([
 ]);  
 $url = $result['ObjectURL'];
 echo $url;
-echo "s3 upload done";
-/*
+echo "s3 file uploaded";
+
 $rds = new Aws\Rds\RdsClient([
     'version' => 'latest',
     'region'  => 'us-east-1'
@@ -77,7 +77,7 @@ if (mysqli_connect_errno()) {
     printf("Connect failed: %s\n", mysqli_connect_error());
     exit();
 }
-
+/*
 if (!($stmt = $link->prepare("INSERT INTO items (id,Uname,Email,Phone,RawS3Url,FinalS3Url,JpgFileName,status,Issubscribed) VALUES (NULL,?,?,?,?,?,?,?,?)"))) {
     print "Prepare failed: (" . $link->errno . ") " . $link->error;
 }

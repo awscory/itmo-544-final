@@ -1,5 +1,5 @@
 <?php
-echo"Submit.php page"
+echo"Submit.php page";
 require 'vendor/autoload.php';
 if(!empty($_POST)){
 echo $_POST['email'];

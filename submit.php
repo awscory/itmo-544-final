@@ -1,6 +1,13 @@
 <?php
+echo"Submit.php page"
 require 'vendor/autoload.php';
-
+if(!empty($_POST)){
+echo $_POST['email'];
+echo $_POST['phone'];
+}
+else {
+echo "Post data is empty";
+}
 print_r ($_POST);
 $uploaddir = '/tmp/';
 $uploadfile = $uploaddir. basename($_FILES['userfile']['name']);
@@ -25,12 +32,14 @@ $result = $s3->createBucket([
 ]);
 
 
-$client->waitUntil('BucketExists',array('Bucket' => $bucket));
+$s3->waitUntil('BucketExists',array('Bucket' => $bucket));
 
-$result = $client->putObject([
+$result = $s3->putObject([
     'ACL' => 'public-read',
     'Bucket' => $bucket,
-   'Key' => $uploadfile
+   'Key' => $uploadfile,
+'ContentType' => $_FILES['userfile']['type'],
+    'Body'   => fopen($uploadfile, 'r+')
 ]);  
 $url = $result['ObjectURL'];
 print $url;
@@ -42,10 +51,10 @@ $result = $rds->describeDBInstances([
     'DBInstanceIdentifier' => 'itmo-544-sukanya',
 ]);
 
-$endpoint = $result['DBInstances']['Endpoint']['Address']
+$endpoint = $result['DBInstances'][0]['Endpoint']['Address']
     print "============\n". $endpoint . "================";
 
-$link = mysqli_connect($endpoint,"SukanyaN","SukanyaNDB","items") or die("Error " . mysqli_error($link));
+$link = mysqli_connect($endpoint,"SukanyaN","SukanyaNDB","items",3306) or die("Error " . mysqli_error($link));
 
 if (mysqli_connect_errno()) {
     printf("Connect failed: %s\n", mysqli_connect_error());
@@ -70,12 +79,10 @@ if (!$stmt->execute()) {
 printf("%d Row inserted.\n", $stmt->affected_rows);
 
 $stmt->close();
-$link->real_query("SELECT * FROM items");
-$res = $link->use_result();
+$sql1 = "SELECT * FROM items";
+$result = mysqli_query($link, $sql1);
 print "Result set order...\n";
-while ($row = $res->fetch_assoc()) {
-    print $row['id'] . " " . $row['email']. " " . $row['phone'];
-}
+
 $link->close();
 ?>
 

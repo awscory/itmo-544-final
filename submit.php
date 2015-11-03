@@ -10,12 +10,19 @@ echo "Post data is empty";
 }
 print_r ($_POST);
 
+if (isset ($_FILES['userfile'])){
 $uploaddir = '/tmp/';
-$uploadfile = $uploaddir. basename($_FILES['myfile']['name']);
-if (move_uploaded_file($_FILES['myfile']['tmp_name'], $uploadfile)) {
+$uploadfile = $uploaddir. basename($_FILES['userfile']['name']);
+if (move_uploaded_file($_FILES['userfile']['tmp_name'], $uploadfile)) {
     print "File is valid, and was successfully uploaded.\n";
 } else {
     print "Possible file upload attack!\n";
+}
+}
+else
+{
+
+print "file not valid ";
 }
 print 'Here is some more debugging info:';
 print_r($_FILES);

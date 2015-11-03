@@ -77,6 +77,10 @@ $link = mysqli_connect($endpoint,"SukanyaN","SukanyaNDB","itmo544SNDB") or die("
 
 print_r($link);
 
+if (mysqli_connect_errno()) {
+    printf("Connect failed: %s\n", mysqli_connect_error());
+    exit();
+}
 echo "connection success";
 /*
 if (!($stmt = $link->prepare("INSERT INTO items (id,Uname,Email,Phone,RawS3Url,FinalS3Url,JpgFileName,status,Issubscribed) VALUES (NULL,?,?,?,?,?,?,?,?)"))) {
@@ -95,19 +99,9 @@ $s3finishedurl = "none";
 $filename = basename($_FILES['userfile']['name']);
 $status =0;
 $issubscribed=0;
-if (!$stmt->bind_param("sssssii",$uname,$email,$phone,$s3rawurl,$s3finishedurl,$filename,$status,$issubscribed)){
-echo "binding failed";
-}
-else
-{
-echo "binding success";
-}
+$stmt->bind_param("sssssii",$uname,$email,$phone,$s3rawurl,$s3finishedurl,$filename,$status,$issubscribed);
 if (!$stmt->execute()) {
     print "Execute failed: (" . $stmt->errno . ") " . $stmt->error;
-}
-else
-{
-echo "execution success";
 }
 printf("%d Row inserted.\n", $stmt->affected_rows);
 

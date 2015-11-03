@@ -69,7 +69,7 @@ echo "No error as of now";
 
 print_r($result);
 
-$endpoint = $result['DBInstances']['Endpoint']['Address'];
+$endpoint = $result['DBInstances'][0]['Endpoint']['Address'];
     print "============\n". $endpoint . "================";
 echo "endpoint is available";
 

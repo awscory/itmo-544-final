@@ -1,6 +1,6 @@
 <?php
-echo"Submit.php page";
 require 'vendor/autoload.php';
+echo"Submit.php page";
 if(!empty($_POST)){
 echo $_POST['email'];
 echo $_POST['phone'];

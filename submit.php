@@ -60,7 +60,7 @@ echo "s3 file uploaded";
 
 $rds = new Aws\Rds\RdsClient([
     'version' => 'latest',
-    'region'  => 'us-west-2b'
+    'region'  => 'us-west-2'
 ]);
 
 $result = $rds->describeDBInstances(['DBInstanceIdentifier' => 'itmo-544-sukanya']);

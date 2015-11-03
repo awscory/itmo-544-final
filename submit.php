@@ -82,7 +82,7 @@ if (mysqli_connect_errno()) {
     exit();
 }
 echo "connection success";
-/*
+
 if (!($stmt = $link->prepare("INSERT INTO items (id,Uname,Email,Phone,RawS3Url,FinalS3Url,JpgFileName,status,Issubscribed) VALUES (NULL,?,?,?,?,?,?,?,?)"))) {
     print "Prepare failed: (" . $link->errno . ") " . $link->error;
 }
@@ -90,7 +90,7 @@ else
 {
 print "statement was success"
 }
-
+/*
 $uname = $_POST['username'];
 $email = $_POST['email'];
 $phone = $_POST['phone'];

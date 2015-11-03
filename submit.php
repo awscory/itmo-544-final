@@ -63,18 +63,14 @@ $rds = new Aws\Rds\RdsClient([
     'region'  => 'us-west-2b'
 ]);
 
+$result = $rds->describeDBInstances(['DBInstanceIdentifier' => 'itmo-544-sukanya']);
+
 echo "No error as of now";
-/*
-
-$result = $rds->describeDBInstances([
-    'DBInstanceIdentifier' => 'itmo-544-sukanya',
-]);
-
 
 $endpoint = $result['DBInstances'][0]['Endpoint']['Address']
     print "============\n". $endpoint . "================";
 echo "endpoint is available";
-
+/*
 $link = mysqli_connect($endpoint,"SukanyaN","SukanyaNDB","items",3306) or die("Error " . mysqli_error($link));
 
 if (mysqli_connect_errno()) {

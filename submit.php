@@ -73,7 +73,7 @@ $endpoint = $result['DBInstances'][0]['Endpoint']['Address'];
     print "============\n". $endpoint . "================";
 echo "endpoint is available";
 
-$link = mysqli_connect($endpoint,"SukanyaN","SukanyaNDB","items",3306) or die("Error " . mysqli_error($link));
+$link = mysqli_connect($endpoint,"SukanyaN","SukanyaNDB","itmo544SNDB") or die("Error " . mysqli_error($link));
 
 print_r($link);
 

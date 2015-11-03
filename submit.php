@@ -82,13 +82,13 @@ if (mysqli_connect_errno()) {
     exit();
 }
 echo "connection success";
-
-if (!($stmt = $link->prepare("INSERT INTO items (UName,Email,Phone,RawS3Url,FinalS3Url,JpgFileName,status,Issubscribed) VALUES (?,?,?,?,?,?,?,?)"))) {
+$sql_insert = "INSERT INTO items (UName,Email,Phone,RawS3Url,FinalS3Url,JpgFileName,status,Issubscribed) VALUES (?,?,?,?,?,?,?,?)";
+if (!($stmt = $link->prepare($sql_insert))) {
     echo "Prepare failed: (" . $link->errno . ") " . $link->error;
 }
 else
 {
-echo "statement was success"
+echo "statement was success";
 }
 /*
 $uname = $_POST['username'];

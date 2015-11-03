@@ -60,7 +60,7 @@ echo "s3 file uploaded";
 
 $rds = new Aws\Rds\RdsClient([
     'version' => 'latest',
-    'region'  => 'us-east-1'
+    'region'  => 'us-west-2'
 ]);
 
 

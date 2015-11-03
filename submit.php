@@ -29,7 +29,7 @@ print "file not valid ";
 }
 print 'Here is some more debugging info:';
 print_r($_FILES);
-/*
+
 $s3=new Aws\S3\S3Client([
     'version' => 'latest',
     'region'  => 'us-east-1'
@@ -94,7 +94,7 @@ $sql1 = "SELECT * FROM items";
 $result = mysqli_query($link, $sql1);
 print "Result set order...\n";
 
-$link->close();*/
+$link->close();
 ?>
 
  

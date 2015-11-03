@@ -47,20 +47,23 @@ $result = $s3->waitUntil('BucketExists',array('Bucket' => $bucket));
 
 echo "bucket creation done";
 
-/*
 $result = $s3->putObject([
     'ACL' => 'public-read',
     'Bucket' => $bucket,
-   'Key' => $uploadfile,
+   'Key' => "uploads".$uploadfile,
 'ContentType' => $_FILES['userfile']['type'],
     'Body'   => fopen($uploadfile, 'r+')
 ]);  
 $url = $result['ObjectURL'];
-print $url;
+echo $url;
+echo "s3 upload done";
+/*
 $rds = new Aws\Rds\RdsClient([
     'version' => 'latest',
     'region'  => 'us-east-1'
 ]);
+
+
 $result = $rds->describeDBInstances([
     'DBInstanceIdentifier' => 'itmo-544-sukanya',
 ]);

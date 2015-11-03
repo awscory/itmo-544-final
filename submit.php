@@ -1,4 +1,5 @@
 <?php
+session_start();
 require 'vendor/autoload.php';
 echo "Submit.php page";
 if(!empty($_POST)){

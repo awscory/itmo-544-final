@@ -82,7 +82,7 @@ if (mysqli_connect_errno()) {
     exit();
 }
 echo "connection success";
-/*
+
 if (!($stmt = $link->prepare("INSERT INTO items (id,Uname,Email,Phone,RawS3Url,FinalS3Url,JpgFileName,status,Issubscribed) VALUES (NULL,?,?,?,?,?,?,?,?)"))) {
     print "Prepare failed: (" . $link->errno . ") " . $link->error;
 }
@@ -109,7 +109,7 @@ $stmt->close();
 $sql1 = "SELECT * FROM items";
 $result = mysqli_query($link, $sql1);
 print "Result set order...\n";
-*/
+
 $link->close();
 ?>
 

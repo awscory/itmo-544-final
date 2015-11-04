@@ -14,8 +14,8 @@ $result = $rds->describeDBInstances(['DBInstanceIdentifier' => 'itmo-544-sukanya
 
 #get the end point to the instance
 $endpoint = $result['DBInstances'][0]['Endpoint']['Address'];
-    print "============\n". $endpoint . "================";
-echo "endpoint is available";
+  //  print "============\n". $endpoint . "================";
+//echo "endpoint is available";
 
 $link = mysqli_connect($endpoint,"SukanyaN","SukanyaNDB","itmo544SNDB");
 
@@ -60,7 +60,8 @@ $sqlstat= "SELECT * FROM items WHERE Email='$useremail'";
 }
 else
 {
-$sqlstat= "SELECT * FROM items";
+echo "else select here";
+$sqlstat= "SELECT ID, JpgFileName, RawS3URL FROM items";
 }
 
 $result = mysqli_query($link, $sqlstat);

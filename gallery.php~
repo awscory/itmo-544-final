@@ -83,7 +83,7 @@ else {
 $link->close();
 }
 ?>
-<ul class="magnific-gallery">
+<ul class="gallery">
   <?php foreach ($imgLocations as $key => $value) {
   ?>
   <li>	

@@ -21,12 +21,12 @@ if (move_uploaded_file($_FILES['userfile']['tmp_name'], $uploadfile)) {
 } else {
     print "Possible file upload attack!\n";
 }
-}
-else
-{
+//}
+//else
+//{
 
-print "file not valid ";
-}
+//print "file not valid ";
+//}
 print 'Here is some more debugging info:';
 print_r($_FILES);
 
@@ -124,6 +124,22 @@ else {
 }
 
 $link->close();
+// redirect to gallery.php to display pictures
+// reference http://stackoverflow.com/questions/768431/how-to-make-a-redirect-in-php
+
+function redirect($url, $statusCode = 303)
+{
+   header('Location: ' . $url, true, $statusCode);
+   die();
+}
+
+$url = "gallery.php";
+redirect($url);
+}
+else
+{
+echo "file invalid";
+}
 
 ?>
 

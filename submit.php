@@ -137,7 +137,7 @@ $link->close();
 <div class="gallery">
   <?php foreach ($imgLocations as $key => $value) {
   ?>
-  <a href="<?php echo $value ?>"><?php echo $key ?></a>
+  <a href="<?php echo $value ?>"> <img src="<?php echo $value ?>"></img><?php echo $key ?></a>
   <?php }?>
 </div>
 

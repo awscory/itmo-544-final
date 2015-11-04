@@ -168,6 +168,7 @@ $link->close();
 <!-- Magnific Popup core JS file -->
 <script src="https://raw.githubusercontent.com/dimsemenov/Magnific-Popup/master/dist/jquery.magnific-popup.js"></script>
 
+<!-- put this in a separate js file on github and link -->
 <script type="javascript">
 $(document).ready(function() {
 	$('.gallery').magnificPopup({

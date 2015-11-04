@@ -94,10 +94,10 @@ aws elb create-lb-cookie-stickiness-policy --load-balancer-name $7 --policy-name
 
 #Step Create Auto scaling group
 echo "creating launch configuration"
-#aws autoscaling create-launch-configuration --launch-configuration-name itmo544-launch-config --image-id $1 --key-name $4  --security-groups $5 --instance-type $3 --user-data file://EnvSetUp/install-env.sh --iam-instance-profile $8
+aws autoscaling create-launch-configuration --launch-configuration-name itmo544-launch-config --image-id $1 --key-name $4  --security-groups $5 --instance-type $3 --user-data file://EnvSetUp/install-env.sh --iam-instance-profile $8
 
 echo "creating auto scaling group"
-#aws autoscaling create-auto-scaling-group --auto-scaling-group-name itmo-544-Sukanya-auto-scaling-group-2 --launch-configuration-name itmo544-launch-config --load-balancer-names $7  --health-check-type ELB --min-size 1 --max-size 3 --desired-capacity 2 --default-cooldown 600 --health-check-grace-period 120 --vpc-zone-identifier $6 
+aws autoscaling create-auto-scaling-group --auto-scaling-group-name itmo-544-Sukanya-auto-scaling-group-2 --launch-configuration-name itmo544-launch-config --load-balancer-names $7  --health-check-type ELB --min-size 1 --max-size 3 --desired-capacity 2 --default-cooldown 600 --health-check-grace-period 120 --vpc-zone-identifier $6 
 
 #Step Creating RDS db-subnet-group
 echo "creating DB-subnet-group"

@@ -127,10 +127,29 @@ $link->close();
 /*********************************************************************/
 
 ?>
+<!DOCTYPE html>
 <html><head>
 <!-- Magnific Popup core CSS file -->
 <link rel="stylesheet" href="https://raw.githubusercontent.com/dimsemenov/Magnific-Popup/master/dist/magnific-popup.css">
 
+<style>
+.magnific-gallery
+{
+	list-style: none;
+}
+
+.magnific-gallery li
+{
+	float: left;
+	height: 100px;
+}
+
+.magnific-gallery img
+{
+	height: 100%;
+}
+
+    </style>
 </head>
 <body>
 
@@ -150,10 +169,16 @@ $link->close();
 <script src="https://raw.githubusercontent.com/dimsemenov/Magnific-Popup/master/dist/jquery.magnific-popup.js"></script>
 
 <script type="javascript">
-$('.gallery').magnificPopup({
-  delegate: 'a', // child items selector, by clicking on it popup will open
-  type: 'image'
-  gallery: { enabled: true }
+$(document).ready(function() {
+	$('.gallery').magnificPopup({
+		type: 'image',
+		delegate: 'a',
+		gallery: {
+			enabled: true,
+			
+		},
+		
+	});
 });
  
 </script>

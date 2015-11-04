@@ -24,7 +24,7 @@ $link = mysqli_connect($endpoint,"SukanyaN","SukanyaNDB","itmo544SNDB");
 <!DOCTYPE html>
 <html><head>
 <!-- Magnific Popup core CSS file -->
-<link rel="stylesheet" href="https://raw.githubusercontent.com/dimsemenov/Magnific-Popup/master/dist/magnific-popup.css">
+<link rel="stylesheet" href="https://raw.githubusercontent.com/sukanyaN/itmo-544-final/master/css/magnific-popup.css">
 
 <style>
 .magnific-gallery
@@ -99,8 +99,8 @@ $link->close();
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 
 <!-- Magnific Popup core JS file -->
-<script src="https://raw.githubusercontent.com/dimsemenov/Magnific-Popup/master/dist/jquery.magnific-popup.js"></script>
+<script src="https://raw.githubusercontent.com/sukanyaN/itmo-544-final/master/js/jquery.magnific-popup.js"></script>
 
 <!-- js file on github and link -->
-<script src="js/jqgallery.js"></script>
+<script src="https://raw.githubusercontent.com/sukanyaN/itmo-544-final/master/js/jqgallery.js"></script>
 </html>

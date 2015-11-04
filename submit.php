@@ -106,13 +106,16 @@ if (!$stmt->execute()) {
 printf("%d Row inserted.\n", $stmt->affected_rows);
 
 $stmt->close();
-$sql1 = "SELECT ID, RawS3URL FROM items";
+$sql1 = "SELECT ID, JpgFileName, RawS3URL FROM items ";
 $result = mysqli_query($link, $sql1);
+$imgLocations = array();
 print "Result set order...\n";
 
 if (mysqli_num_rows($result) > 0) {
     // output data of each row
     while($row = mysqli_fetch_assoc($result)) {
+        //this will append the path of images to an array
+        $imgLocations[$row["JpgFileName"]] = $row["RawS3URL"];
         echo "id: " . $row["ID"]."- RawS3URL" . $row["RawS3URL"]. "<br>";
     }
 } 
@@ -121,8 +124,37 @@ else {
 }
 
 $link->close();
+/*********************************************************************/
+
 ?>
+<html><head>
+<!-- Magnific Popup core CSS file -->
+<link rel="stylesheet" href="https://raw.githubusercontent.com/dimsemenov/Magnific-Popup/master/dist/magnific-popup.css">
 
+</head>
+<body>
+
+<div class="gallery">
+  <?foreach ($imgLocations as $key => $value) {
+  ?>
+  <a href="'.$value.'"><?php echo $key ?></a>
+  <?}?>
+</div>
+
+</body>
+
+<!-- jQuery 1.7.2+ or Zepto.js 1.0+ -->
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+
+<!-- Magnific Popup core JS file -->
+<script src="https://raw.githubusercontent.com/dimsemenov/Magnific-Popup/master/dist/jquery.magnific-popup.js"></script>
+
+<script type="javascript">
+$('.gallery').magnificPopup({
+  delegate: 'a', // child items selector, by clicking on it popup will open
+  type: 'image'
+  gallery: { enabled: true }
+});
  
-
-
+</script>
+</html>

@@ -137,14 +137,14 @@ $link->close();
 <div class="gallery">
   <?php foreach ($imgLocations as $key => $value) {
   ?>
-  <a href="'.$value.'"><?php echo $key ?></a>
+  <a href="<?php echo $value ?>"><?php echo $key ?></a>
   <?php }?>
 </div>
 
 </body>
 
 <!-- jQuery 1.7.2+ or Zepto.js 1.0+ -->
-<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script src="ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 
 <!-- Magnific Popup core JS file -->
 <script src="https://raw.githubusercontent.com/dimsemenov/Magnific-Popup/master/dist/jquery.magnific-popup.js"></script>

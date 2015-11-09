@@ -123,17 +123,19 @@ else {
     echo "----0 results";
 }
 
+$link->close();
 // redirect to gallery.php to display pictures
 // reference http://stackoverflow.com/questions/768431/how-to-make-a-redirect-in-php
 
-mysqli_close($link);
 function redirect()
 {
-   header('Location:gallery.php', true, 303);
+   echo "inside redirect";
+   header("Refresh: 5;url=gallery.php");
    die();
 }
+
 redirect();
 }
-?>
 
+?>
 

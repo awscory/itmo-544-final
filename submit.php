@@ -127,15 +127,13 @@ else {
 // reference http://stackoverflow.com/questions/768431/how-to-make-a-redirect-in-php
 
 mysqli_close($link);
-function redirect($url, $statusCode = 303)
+function redirect()
 {
-   header('Location: ' . $url, true, $statusCode);
+   header('Location:gallery.php', true, 303);
    die();
 }
-$url	= "gallery.php";
-redirect($url);
+redirect();
 }
 ?>
 
-?>
 

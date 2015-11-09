@@ -60,7 +60,6 @@ $sqlstat= "SELECT * FROM items WHERE Email='$useremail'";
 }
 else
 {
-echo "else select here";
 $sqlstat= "SELECT ID, JpgFileName, RawS3URL FROM items";
 }
 

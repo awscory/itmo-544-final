@@ -130,7 +130,7 @@ $link->close();
 function redirect()
 {
    echo "inside redirect";
-   header('Location: gallery.php', true, 303);
+   header('Location: www.google.com');
    die();
 }
 

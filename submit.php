@@ -130,10 +130,11 @@ $link->close();
 function redirect()
 {
    echo "inside redirect";
-   header('Location: www.google.com');
+   ?>
+   <script>location.href='/gallery.php'</script>
+   <?php
    die();
 }
-
 redirect();
 
 ?>

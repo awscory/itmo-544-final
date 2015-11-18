@@ -123,6 +123,31 @@ else {
     echo "----0 results";
 }
 
+//create sns and configure autoscaling to send notification to sns on alarm
+$sns= new Aws\Sns\SnsClient([
+    'version' => 'latest',
+    'region'  => 'us-east-1'
+]);
+//create topic
+$topicarn = $sns->createTopic([
+    'Name' => 'Mp2-Topic1', // REQUIRED
+]);
+echo "topic arn value is ----------- $topicarn";
+//set topic attributes
+$result = $sns->setTopicAttributes([
+    'AttributeName' => 'DisplayName', // REQUIRED
+    'AttributeValue' => 'TopicMP2',
+    'TopicArn' => $topicarn, // REQUIRED
+]);
+//subscribe to the topic using the sms protocol
+$result = $sns->subscribe([
+    'Endpoint' => '13126780134',
+    'Protocol' => 'sms', // REQUIRED
+    'TopicArn' => $topicarn, // REQUIRED
+]);
+
+echo "the subscription ARN is $result";
+
 $link->close();
 // redirect to gallery.php to display pictures
 // reference http://stackoverflow.com/questions/768431/how-to-make-a-redirect-in-php

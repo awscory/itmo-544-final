@@ -148,7 +148,7 @@ $result = $sns->subscribe([
     'TopicArn' => $topicarn, // REQUIRED
 ]);
 
-echo "the subscription ARN is $result['SubscriptionArn']";
+
 
 $link->close();
 // redirect to gallery.php to display pictures

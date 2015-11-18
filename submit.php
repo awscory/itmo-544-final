@@ -129,9 +129,11 @@ $sns= new Aws\Sns\SnsClient([
     'region'  => 'us-east-1'
 ]);
 //create topic
-$topicarn = $sns->createTopic([
+$result = $sns->createTopic([
     'Name' => 'Mp2-Topic1', // REQUIRED
 ]);
+
+$topicarn = $result['TopicArn'];
 echo "topic arn value is ----------- $topicarn";
 //set topic attributes
 $result = $sns->setTopicAttributes([
@@ -146,7 +148,7 @@ $result = $sns->subscribe([
     'TopicArn' => $topicarn, // REQUIRED
 ]);
 
-echo "the subscription ARN is $result";
+echo "the subscription ARN is $result['SubscriptionArn']";
 
 $link->close();
 // redirect to gallery.php to display pictures

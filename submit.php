@@ -147,6 +147,8 @@ $result = $sns->subscribe([
     'Protocol' => 'sms', // REQUIRED
     'TopicArn' => $topicarn, // REQUIRED
 ]);
+$subarn= $result['SubscriptionArn'];
+echo "subscription arn is $subarn";
 $result = $sns->publish([
     'Message' => 'Image uploaded successfully', // REQUIRED
     'Subject' => 'Image has been uploaded successfully to S3',
@@ -162,7 +164,7 @@ function redirect()
    <?php
    die();
 }
-//redirect();
+//redirect(); -- commented for testing SNS
 
 ?>
 

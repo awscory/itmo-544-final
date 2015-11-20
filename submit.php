@@ -143,16 +143,16 @@ $result = $sns->setTopicAttributes([
 ]);
 //subscribe to the topic using the sms protocol
 $result = $sns->subscribe([
-    'Endpoint' => '13126780134',
+    'Endpoint' => $phone,
     'Protocol' => 'sms', // REQUIRED
     'TopicArn' => $topicarn, // REQUIRED
 ]);
-
-
-
+$result = $sns->publish([
+    'Message' => 'Image uploaded successfully', // REQUIRED
+    'Subject' => 'Image has been uploaded successfully to S3',
+    'TopicArn' => $topicarn,
+]);
 $link->close();
-// redirect to gallery.php to display pictures
-// reference http://stackoverflow.com/questions/768431/how-to-make-a-redirect-in-php
 }
 function redirect()
 {
@@ -162,7 +162,7 @@ function redirect()
    <?php
    die();
 }
-redirect();
+//redirect();
 
 ?>
 

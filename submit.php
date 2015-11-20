@@ -149,34 +149,7 @@ $result = $sns->subscribe([
 ]);
 $subarn= $result['SubscriptionArn'];
 echo "subscription arn is $subarn";
-$i = 0;
-for (; ; )
-{
-	$result = $sns->listSubscriptionsByTopic([
-	    'TopicArn' => $topicarn, // REQUIRED
-	]);
-	echo "waiting subscription confirmation";
-	echo "looking endpoint $result['Subscriptions'][$i]['Endpoint']";
-	$phone1 = $result['Subscriptions'][$i]['Endpoint'];
-	if ($phone == $phone1)
-	{
-		if (!empty($result['Subscriptions'][$i]['SubscriptionArn'])){
-			echo "subscription ARN is not empty";
-			$issubscribed=1;
-			//connect to db to update the field for the user
-			break;
-		}
-	}
-	else
-	{
-	i++;
-	}
-	if ( i > 120)
-	{
-	//if user does not confirm within 2 minutes, break the loop
-	break;
-	}
-}
+
 $result = $sns->publish([
     'Message' => 'Image uploaded successfully', // REQUIRED
     'Subject' => 'Image has been uploaded successfully to S3',

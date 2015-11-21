@@ -29,24 +29,7 @@ if ($link->query($sql) === TRUE) {
 } else {
     echo "Error creating table: " . $link->error;
 }
-//create topic
-$sns= new Aws\Sns\SnsClient([
-    'version' => 'latest',
-    'region'  => 'us-east-1'
-]);
-$topicName = 'Mp2-Topic1';
-$result = $sns->createTopic([
-    'Name' => $topicName, // REQUIRED
-]);
 
-$topicarn = $result['TopicArn'];
-echo "topic arn value is ----------- $topicarn";
-//set topic attributes
-$result = $sns->setTopicAttributes([
-    'AttributeName' => 'DisplayName', // REQUIRED
-    'AttributeValue' => 'TestMP2',
-    'TopicArn' => $topicarn, // REQUIRED
-]);
 $sql = "CREATE TABLE topic
 (ID INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
 topicarn Varchar(256),
@@ -57,22 +40,6 @@ if ($link->query($sql) === TRUE) {
 } else {
     echo "Error creating table: " . $link->error;
 }
-$sql_insert = "INSERT INTO topic (topicarn,topicname) VALUES (?,?)";
-if (!($stmt = $link->prepare($sql_insert))) {
-    echo "Prepare failed: (" . $link->errno . ") " . $link->error;
-}
-else
-{
-echo "statement topic was success";
-}
-
-$stmt->bind_param("ss",$topicarn,$topicName);
-if (!$stmt->execute()) {
-    print "Execute failed: (" . $stmt->errno . ") " . $stmt->error;
-}
-printf("%d Row inserted.\n", $stmt->affected_rows);
-
-$stmt->close();
 
 $link->close();
 

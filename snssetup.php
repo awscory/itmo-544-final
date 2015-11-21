@@ -9,17 +9,17 @@ $rds = new Aws\Rds\RdsClient([
 
 $result = $rds->describeDBInstances(['DBInstanceIdentifier' => 'itmo-544-sukanya']);
 
-echo "No error as of now";
+//echo "No error as of now";
 
-print_r($result);
+//print_r($result);
 
 $endpoint = $result['DBInstances'][0]['Endpoint']['Address'];
-    print "============\n". $endpoint . "================";
-echo "endpoint is available";
+//    print "============\n". $endpoint . "================";
+//echo "endpoint is available";
 
 $link = mysqli_connect($endpoint,"SukanyaN","SukanyaNDB","itmo544SNDB") or die("Error " . mysqli_error($link));
 
-print_r($link);
+//print_r($link);
 
 if (mysqli_connect_errno()) {
     printf("Connect failed: %s\n", mysqli_connect_error());
@@ -32,7 +32,7 @@ $result = mysqli_query($link, $sql1);
 if (mysqli_num_rows($result) > 0) {
     // output data of each row
     while($row = mysqli_fetch_assoc($result)) {
-	echo "topicarn:".$row["topicarn"]."<br>";
+	//echo "topicarn:".$row["topicarn"]."<br>";
 	if ($row["topicname"] == 'Mp2-Topic1')
 	{
 	echo "topic already exist";
@@ -49,7 +49,7 @@ if (mysqli_num_rows($result) > 0) {
 	]);
 
 	$topicarn = $result['TopicArn'];
-	echo "topic arn value is ----------- $topicarn";
+//	echo "topic arn value is ----------- $topicarn";
 	//set topic attributes
 	$result = $sns->setTopicAttributes([
 	    'AttributeName' => 'DisplayName', // REQUIRED
@@ -69,7 +69,7 @@ if (mysqli_num_rows($result) > 0) {
 	if (!$stmt->execute()) {
 	    print "Execute failed: (" . $stmt->errno . ") " . $stmt->error;
 	}
-	printf("%d Row inserted.\n", $stmt->affected_rows);
+//	printf("%d Row inserted.\n", $stmt->affected_rows);
 
 	$stmt->close();
 	}
@@ -86,7 +86,7 @@ else {
 	]);
 
 	$topicarn = $result['TopicArn'];
-	echo "topic arn value is ----------- $topicarn";
+//	echo "topic arn value is ----------- $topicarn";
 	//set topic attributes
 	$result = $sns->setTopicAttributes([
 	    'AttributeName' => 'DisplayName', // REQUIRED

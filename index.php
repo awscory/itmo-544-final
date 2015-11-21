@@ -13,6 +13,7 @@ Your File : <input type="file" name="userfile">
 <input type="submit" value="Upload">
 </form>
 <form enctype="multipart/form-data" action="subscribe.php" method="post">
+<input type="hidden" id="phone_hidden"/>
 Would you like to subscribe to S3-upload message<input type="submit" value="Subscribe">
 </form>
 <?php
@@ -22,6 +23,14 @@ print_r($_SESSION);
 }
 ?>
 </body>
+<script type="javascript">
+$(document).ready(function () {
+    $('#phone_hidden').val($('#phone').val());
+    $('#phone').on('change', function (e) {
+       $('#phone_hidden').val($('#phone').val());
+    });
+});
+</script>
 </html> 
 
 

@@ -4,7 +4,7 @@ require 'vendor/autoload.php';
 echo "Submit.php page";
 if(!empty($_POST)){
 //echo $_POST['email'];
-echo "You will receive message to the number $_POST['phone'] if you have subscribed";
+echo $_POST['phone'];
 }
 else {
 echo "Post data is empty";
@@ -115,7 +115,7 @@ if (mysqli_num_rows($result) > 0) {
     // output data of each row
     while($row = mysqli_fetch_assoc($result)) {
 //	echo "topicarn:".$row["topicarn"]."<br>";
-	if ($row["topicname"] == 'Mp2-S3Upload')
+	if ($row["topicname"] == 'Mp2-S3Upload1')
 	{
 	//create sns and configure autoscaling to send notification to sns on alarm
 	$sns= new Aws\Sns\SnsClient([

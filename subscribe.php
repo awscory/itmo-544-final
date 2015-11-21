@@ -34,7 +34,7 @@ if (mysqli_num_rows($result) > 0) {
     // output data of each row
     while($row = mysqli_fetch_assoc($result)) {
 
-	if ($row["topicname"] == 'Mp2-S3Upload')
+	if ($row["topicname"] == 'Mp2-S3Upload1')
 	{
 	$sns= new Aws\Sns\SnsClient([
 	    'version' => 'latest',

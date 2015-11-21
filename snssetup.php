@@ -33,7 +33,7 @@ if (mysqli_num_rows($result) > 0) {
     // output data of each row
     while($row = mysqli_fetch_assoc($result)) {
 	//echo "topicarn:".$row["topicarn"]."<br>";
-	if ($row["topicname"] == 'Mp2-Topic1')
+	if ($row["topicname"] == 'Mp2-S3Upload')
 	{
 	echo "topic already exist";
 	}
@@ -43,7 +43,7 @@ if (mysqli_num_rows($result) > 0) {
 	    'version' => 'latest',
 	    'region'  => 'us-east-1'
 	]);
-	$topicName = 'Mp2-Topic1';
+	$topicName = 'Mp2-S3Upload';
 	$result = $sns->createTopic([
 	    'Name' => $topicName, // REQUIRED
 	]);
@@ -53,7 +53,7 @@ if (mysqli_num_rows($result) > 0) {
 	//set topic attributes
 	$result = $sns->setTopicAttributes([
 	    'AttributeName' => 'DisplayName', // REQUIRED
-	    'AttributeValue' => 'TestMP2',
+	    'AttributeValue' => 'S3Upload',
 	    'TopicArn' => $topicarn, // REQUIRED
 	]);
 	    $sql_insert = "INSERT INTO topic (topicarn,topicname) VALUES (?,?)";
@@ -80,7 +80,7 @@ else {
 	    'version' => 'latest',
 	    'region'  => 'us-east-1'
 	]);
-	$topicName = 'Mp2-Topic1';
+	$topicName = 'Mp2-S3Upload';
 	$result = $sns->createTopic([
 	    'Name' => $topicName, // REQUIRED
 	]);
@@ -90,7 +90,7 @@ else {
 	//set topic attributes
 	$result = $sns->setTopicAttributes([
 	    'AttributeName' => 'DisplayName', // REQUIRED
-	    'AttributeValue' => 'TestMP2',
+	    'AttributeValue' => 'S3Upload',
 	    'TopicArn' => $topicarn, // REQUIRED
 	]);
 	    $sql_insert = "INSERT INTO topic (topicarn,topicname) VALUES (?,?)";

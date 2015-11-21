@@ -25,9 +25,8 @@ print_r($_SESSION);
 ?>
 </body>
 </html> 
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 <script src="https://raw.githubusercontent.com/sukanyaN/itmo-544-final/master/js/copytext.js"></script>
-
-
 
 
 

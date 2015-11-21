@@ -165,7 +165,7 @@ function redirect()
    <?php
    die();
 }
-//redirect(); -- commented for testing SNS
+redirect(); -- commented for testing SNS
 
 ?>
 

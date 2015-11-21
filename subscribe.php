@@ -2,7 +2,8 @@
 session_start();
 require 'vendor/autoload.php';
 if(!empty($_POST)){
-echo "You are subscribing using Mobile number $_POST['phoneNo']";
+echo "you are being subscribed to the number ";
+echo  $_POST['phoneNo'];
 $phone = $_POST['phoneNo'];
 }
 else

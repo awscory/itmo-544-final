@@ -12,10 +12,10 @@ Phone : <input type="text" id="phone" name="phone" value="312-000-0000"><br>
 <input type="hidden" name="MAX_FILE_SIZE" value="3000000"><br>
 Your File : <input type="file" name="userfile">
 <input type="submit" value="Upload">
-</form>
+</form><br><br>
 <form enctype="multipart/form-data" action="subscribe.php" method="post">
-<input type="text" id="phoneNo" name="phoneNo"/>
-Would you like to subscribe to S3-upload message<input type="submit" value="Subscribe">
+Phone to Subscribe : <input type="text" name="phoneNo"/><br>
+Would you like to subscribe to receive message on Upload ?  <input type="submit" value="Subscribe">
 </form>
 
 </body>

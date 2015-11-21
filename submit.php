@@ -106,55 +106,38 @@ if (!$stmt->execute()) {
 printf("%d Row inserted.\n", $stmt->affected_rows);
 
 $stmt->close();
-$sql1 = "SELECT ID, JpgFileName, RawS3URL FROM items ";
+$sql1 = "SELECT topicarn,topicname FROM topic ";
 $result = mysqli_query($link, $sql1);
-$imgLocations = array();
-print "Result set order...\n";
+//$imgLocations = array();
+//print "Result set order...\n";
 
 if (mysqli_num_rows($result) > 0) {
     // output data of each row
     while($row = mysqli_fetch_assoc($result)) {
+	echo "topicarn:".$row["topicarn"]."<br>";
+	if ($row["topicname"] == 'Mp2-Topic1')
+	{
+	//create sns and configure autoscaling to send notification to sns on alarm
+	$sns= new Aws\Sns\SnsClient([
+	    'version' => 'latest',
+	    'region'  => 'us-east-1'
+	]);
+	$result = $sns->publish([
+	    'Message' => 'Image uploaded successfully', // REQUIRED
+	    'Subject' => 'Image has been uploaded successfully to S3',
+	    'TopicArn' => $row["topicarn"],
+	]);
+	}
         //this will append the path of images to an array
-        $imgLocations[$row["JpgFileName"]] = $row["RawS3URL"];
-        echo "id: " . $row["ID"]."- RawS3URL" . $row["RawS3URL"]. "<br>";
+//        $imgLocations[$row["JpgFileName"]] = $row["RawS3URL"];
+  //      echo "id: " . $row["ID"]."- RawS3URL" . $row["RawS3URL"]. "<br>";
     }
 } 
 else {
     echo "----0 results";
 }
 
-//create sns and configure autoscaling to send notification to sns on alarm
-$sns= new Aws\Sns\SnsClient([
-    'version' => 'latest',
-    'region'  => 'us-east-1'
-]);
-//create topic
-$result = $sns->createTopic([
-    'Name' => 'Mp2-Topic1', // REQUIRED
-]);
 
-$topicarn = $result['TopicArn'];
-echo "topic arn value is ----------- $topicarn";
-//set topic attributes
-$result = $sns->setTopicAttributes([
-    'AttributeName' => 'DisplayName', // REQUIRED
-    'AttributeValue' => 'TopicMP2',
-    'TopicArn' => $topicarn, // REQUIRED
-]);
-//subscribe to the topic using the sms protocol
-$result = $sns->subscribe([
-    'Endpoint' => $phone,
-    'Protocol' => 'sms', // REQUIRED
-    'TopicArn' => $topicarn, // REQUIRED
-]);
-$subarn= $result['SubscriptionArn'];
-echo "subscription arn is $subarn";
-
-$result = $sns->publish([
-    'Message' => 'Image uploaded successfully', // REQUIRED
-    'Subject' => 'Image has been uploaded successfully to S3',
-    'TopicArn' => $topicarn,
-]);
 $link->close();
 }
 function redirect()

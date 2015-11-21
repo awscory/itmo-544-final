@@ -1,7 +1,7 @@
 <?php
 session_start();
 ?>
-
+<!DOCTYPE html>
 <html>
 <body>
 <form enctype="multipart/form-data" action="submit.php" method="post">

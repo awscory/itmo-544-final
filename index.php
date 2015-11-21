@@ -1,5 +1,6 @@
 <?php
 session_start();
+require 'vendor/autoload.php';
 //create topic
 $rds = new Aws\Rds\RdsClient([
     'version' => 'latest',

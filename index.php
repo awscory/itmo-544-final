@@ -26,9 +26,9 @@ print_r($_SESSION);
 </body>
 <script type="javascript">
 $(document).ready(function () {
-    $('#phone_hidden').val($('#phone').val());
+    $('#phone_hidden').value = $('#phone').value;
     $('#phone').on('change', function (e) {
-       $('#phone_hidden').val($('#phone').val());
+       $('#phone_hidden').value = $('#phone').value;
     });
 });
 </script>

@@ -1,7 +1,8 @@
 <?php
 session_start();
-echo "subscribed to number"
-echo $_POST["phoneNo"];
+if(!empty($_POST)){
+echo $_POST['phoneNo'];
+}
 ?>
 <!DOCTYPE html>
  <meta charset="UTF-8"> 

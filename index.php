@@ -15,14 +15,16 @@ Your File : <input type="file" name="userfile">
 <form enctype="multipart/form-data" action="subscribe.php" method="post">
 Would you like to subscribe to S3-upload message<input type="submit" value="Subscribe">
 </form>
-</body>
-</html> 
 <?php
-if (isset($_GET['phone'])){
-$_SESSION['phone']=$_GET['phone']; 
-echo "$_SESSION['phone']";
+if (isset($_GET["phone"])){
+$_SESSION["phone"]=$_GET["phone"]; 
+print_r($_SESSION);
 }
 ?>
+</body>
+</html> 
+
+
 
 
 

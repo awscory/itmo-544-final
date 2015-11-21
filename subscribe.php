@@ -1,6 +1,7 @@
 <?php
 session_start();
-echo $_SESSION['phone'];
+echo "subscribed to number"
+echo $_POST["phone_hidden"];
 ?>
 
 <html>

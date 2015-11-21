@@ -134,7 +134,10 @@ aws rds wait db-instance-available --db-instance-identifier itmo-544-sukanya
 ./itmo-544-final/dbcreate.sh
 
 #create sns topic
-topicArn= aws sns create-topic --name ITMO-544-S3UPLOAD
+topicArn= $(aws sns create-topic --name ITMO-544-S3UPLOAD)
+
+echo "topic arn is $topicArn"
+
 aws sns set-topic-attributes --topic-arn $topicArn --attribute-name DisplayName --attribute-value ITMO-544
 
 echo "ALL DONE"

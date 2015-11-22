@@ -107,6 +107,11 @@ aws sns set-topic-attributes --topic-arn $TopicARN --attribute-name Auto-Scale-W
 
 aws sns subscribe --topic-arn $TopicARN --protocol email --notification-endpoint $9
 
+aws autoscaling put-notification-configuration --auto-scaling-group-name itmo-544-Sukanya-auto-scaling-group-2 --topic-arn $TopicARN --notification-types autoscaling:EC2_INSTANCE_LAUNCH
+
+aws autoscaling put-notification-configuration --auto-scaling-group-name itmo-544-Sukanya-auto-scaling-group-2 --topic-arn $TopicARN --notification-types autoscaling:EC2_INSTANCE_TERMINATE
+
+
 SCALEUP=(`aws autoscaling put-scaling-policy --policy-name SCALEUP --auto-scaling-group-name itmo-544-Sukanya-auto-scaling-group-2 --scaling-adjustment 1 --adjustment-type ChangeInCapacity`)
 aws cloudwatch put-metric-alarm --alarm-name IncreaseInst --alarm-description "when CPU usage is greaterthanorequal to 30 percent" --metric-name CPUUtilization --namespace AWS/EC2 --statistic Average --period 120 --threshold 30 --comparison-operator GreaterThanOrEqualToThreshold --evaluation-periods 1 --dimensions "Name=AutoScalingGroupName,Value=itmo-544-Sukanya-auto-scaling-group-2" --unit Percent --alarm-actions $SCALEUP
 

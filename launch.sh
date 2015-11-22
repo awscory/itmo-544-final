@@ -98,12 +98,27 @@ aws autoscaling create-launch-configuration --launch-configuration-name itmo544-
 echo "creating auto scaling group"
 aws autoscaling create-auto-scaling-group --auto-scaling-group-name itmo-544-Sukanya-auto-scaling-group-2 --launch-configuration-name itmo544-launch-config --load-balancer-names $7  --health-check-type ELB --min-size 3 --max-size 6 --desired-capacity 3 --default-cooldown 600 --health-check-grace-period 120 --vpc-zone-identifier $6 
 
+#create topic for Cloud watch alarm
+TopicARN= ('aws sns create-topic --name Cloudwatch')
+
+echo "cloud watch topic $TopicARN"
+
+aws sns set-topic-attributes --topic-arn $TopicARN --attribute-name Auto-Scale-Watch
+
+aws sns subscribe --topic-arn $TopicARN --protocol email --notification-endpoint $9
+
 SCALEUP=(`aws autoscaling put-scaling-policy --policy-name SCALEUP --auto-scaling-group-name itmo-544-Sukanya-auto-scaling-group-2 --scaling-adjustment 1 --adjustment-type ChangeInCapacity`)
 aws cloudwatch put-metric-alarm --alarm-name IncreaseInst --alarm-description "when CPU usage is greaterthanorequal to 30 percent" --metric-name CPUUtilization --namespace AWS/EC2 --statistic Average --period 120 --threshold 30 --comparison-operator GreaterThanOrEqualToThreshold --evaluation-periods 1 --dimensions "Name=AutoScalingGroupName,Value=itmo-544-Sukanya-auto-scaling-group-2" --unit Percent --alarm-actions $SCALEUP
 
 #Create auto scaling policy to monitor when CPU usage is below or equal to 10 percent 
 SCALEDOWN=(`aws autoscaling put-scaling-policy --policy-name SCALEDOWN --auto-scaling-group-name itmo-544-Sukanya-auto-scaling-group-2 --scaling-adjustment -1 --adjustment-type ChangeInCapacity`)
 aws cloudwatch put-metric-alarm --alarm-name DecreaseInst --alarm-description "when CPU usage lessthanorequal to 10 percent" --metric-name CPUUtilization --namespace AWS/EC2 --statistic Average --period 120 --threshold 10 --comparison-operator LessThanOrEqualToThreshold  --evaluation-periods 1 --dimensions "Name=AutoScalingGroupName,Value=itmo-544-Sukanya-auto-scaling-group-2" --unit Percent --alarm-actions $SCALEDOWN
+
+#create cloud watch to send message to user when there is an alarm
+aws cloudwatch put-metric-alarm --alarm-name IncreaseInstSNS --alarm-description "when CPU usage is greaterthanorequal to 30 percent" --metric-name CPUUtilization --namespace AWS/EC2 --statistic Average --period 120 --threshold 30 --comparison-operator GreaterThanOrEqualToThreshold --evaluation-periods 1 --dimensions "Name=AutoScalingGroupName,Value=itmo-544-Sukanya-auto-scaling-group-2" --unit Percent --alarm-actions $TopicARN
+
+
+aws cloudwatch put-metric-alarm --alarm-name DecreaseInstSNS --alarm-description "when CPU usage lessthanorequal to 10 percent" --metric-name CPUUtilization --namespace AWS/EC2 --statistic Average --period 120 --threshold 10 --comparison-operator LessThanOrEqualToThreshold  --evaluation-periods 1 --dimensions "Name=AutoScalingGroupName,Value=itmo-544-Sukanya-auto-scaling-group-2" --unit Percent --alarm-actions $TopicARN
 
 
 #Step Creating RDS db-subnet-group
@@ -125,7 +140,7 @@ aws rds wait db-instance-available --db-instance-identifier itmo-544-sukanya
 echo "DB instance wait over. It should be Available "
 #Create Read replica of the Db instance in the same region
 echo "creating read replica"
-aws rds create-db-instance-read-replica --db-instance-identifier itmo-544-SN-dbreplica --source-db-instance-identifier itmo-544-SN-db --db-instance-class db.t1.micro --availability-zone us-west-2a
+aws rds create-db-instance-read-replica --db-instance-identifier itmo-544-SN-dbreplica --source-db-instance-identifier itmo-544-sukanya --db-instance-class db.t1.micro --availability-zone us-west-2a
 
 # wait for read replica to be available
 echo "waiting for read replica to be available"

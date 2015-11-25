@@ -1,6 +1,6 @@
 <?php
 session_start();
-require_once('/var/www/html/snssetup.php'); -- starting final project  
+require_once('/var/www/html/snssetup.php'); // starting final project  
 //going to test image magick
 ?>
 <!DOCTYPE html>

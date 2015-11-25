@@ -69,12 +69,14 @@ $filepath = new Imagick($uploadfile);
 $filepath->flipImage();
 mkdir("/tmp/Imagick");
 $extension = end(explode('.', $fname));
+echo "extension here";
 echo $extension;
 $path = '/tmp/Imagick/';
 $imgid = uniqid("DesImage");
 $imgloc = $imgid . '.' . $extension;
 $DestPath = $path . $imgloc;
 echo $DestPath;
+///tmp/Imagick/DesImage56553cb459719.
 $path->writeImage($DestPath);
 
 //bucket creation of flip image

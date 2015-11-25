@@ -9,6 +9,7 @@ echo $_POST['phone'];
 else {
 echo "Post data is empty";
 }
+echo $_SERVER['DOCUMENT_ROOT'];
 $image = new Imagick($_FILES['userfile']);
 $image->thumbnailImage(100, 0);
 

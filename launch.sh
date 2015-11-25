@@ -103,7 +103,7 @@ TopicARN=$(aws sns create-topic --name Cloudwatch)
 
 echo "cloud watch topic $TopicARN"
 
-aws sns set-topic-attributes --topic-arn $TopicARN --attribute-name Auto-Scale-Watch
+aws sns set-topic-attributes --topic-arn $TopicARN --attribute-name DisplayName --attribute-value Auto-Scale-Watch
 
 aws sns subscribe --topic-arn $TopicARN --protocol email --notification-endpoint $9
 

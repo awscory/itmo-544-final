@@ -2,6 +2,7 @@
 session_start();
 require 'vendor/autoload.php';
 //Creating a Backup of the RDS database
+//http://www.tutorialspoint.com/php/perform_mysql_backup_php.htm
 $rds = new Aws\Rds\RdsClient([
     'version' => 'latest',
     'region'  => 'us-west-2'
@@ -17,11 +18,27 @@ $link = mysqli_connect($endpoint,"SukanyaN","SukanyaNDB","itmo544SNDB") or die("
 $dbname = 'itmo544SNDB';
 $dbuser = 'SukanyaN';
 $dbpass = 'SukanyaNDB';
-$backupFile = $dbname . date("Y-m-d-H-i-s") . '.gz';
-$command = "mysqldump --opt -h $endpoint -u $dbuser -p $dbpass $dbname | gzip > $backupFile";
-system($command);
 
-$link->close();
+$table_name = "items";
+   $backup_file  = '/tmp/items'.date("Y-m-d-H-i-s").'.sql';
+   $sql = "SELECT * INTO OUTFILE '$backup_file' FROM $table_name";
+   
+   mysql_select_db('itmo544SNDB');
+   $retval = mysql_query( $sql, $conn );
+   
+   if(! $retval )
+   {
+      die('Could not take data backup: ' . mysql_error());
+   }
+ mysql_close($link);
 echo "Database Backup was successful";
 ?>
-
+<!DOCTYPE html>
+ <meta charset="UTF-8"> 
+<html>
+<body>
+<br>
+<br>
+<a href="index.php"> Main page</a>
+</body>
+</html> 

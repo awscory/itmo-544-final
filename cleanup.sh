@@ -36,6 +36,22 @@ for (( i=0; i<${LENGTH}; i++));
   sleep 1
 done
 
+LAUNCHCONF=(`aws autoscaling describe-launch-configurations --output json | grep LaunchConfigurationName | sed "s/[\"\:\, ]//g" | sed "s/LaunchConfigurationName//g"`)
+
+SCALENAME=(`aws autoscaling describe-auto-scaling-groups --output json | grep AutoScalingGroupName | sed "s/[\"\:\, ]//g" | sed "s/AutoScalingGroupName//g"`)
+
+echo "The asgs are: " ${SCALENAME[@]}
+echo "the number of asgs is: " ${#SCALENAME[@]}
+
+if [ ${#SCALENAME[@]} -gt 0 ]
+  then
+  echo "delete scale group"
+  aws autoscaling update-auto-scaling-group --auto-scaling-group-name $SCALENAME --max-size 0 --min-size 0
+  aws autoscaling describe-auto-scaling-groups --auto-scaling-group-names $SCALENAME
+  aws autoscaling delete-auto-scaling-group --auto-scaling-group-name $SCALENAME --force-delete
+  aws autoscaling delete-launch-configuration --launch-configuration-name $LAUNCHCONF
+  aws cloudwatch delete-alarms --alarm-name  IncreaseInst DecreaseInst
+fi
 
 mapfile -t dbInstanceARR < <(aws rds describe-db-instances --output json | grep "\"DBInstanceIdentifier" | sed "s/[\"\:\, ]//g" | sed "s/DBInstanceIdentifier//g" )
 
@@ -55,22 +71,7 @@ fi
 
 aws rds delete-db-subnet-group --db-subnet-group-name dbsgnameSN
 
-LAUNCHCONF=(`aws autoscaling describe-launch-configurations --output json | grep LaunchConfigurationName | sed "s/[\"\:\, ]//g" | sed "s/LaunchConfigurationName//g"`)
 
-SCALENAME=(`aws autoscaling describe-auto-scaling-groups --output json | grep AutoScalingGroupName | sed "s/[\"\:\, ]//g" | sed "s/AutoScalingGroupName//g"`)
-
-echo "The asgs are: " ${SCALENAME[@]}
-echo "the number of asgs is: " ${#SCALENAME[@]}
-
-if [ ${#SCALENAME[@]} -gt 0 ]
-  then
-  echo "delete scale group"
-  aws autoscaling update-auto-scaling-group --auto-scaling-group-name $SCALENAME --max-size 0 --min-size 0
-  aws autoscaling describe-auto-scaling-groups --auto-scaling-group-names $SCALENAME
-  aws autoscaling delete-auto-scaling-group --auto-scaling-group-name $SCALENAME --force-delete
-  aws autoscaling delete-launch-configuration --launch-configuration-name $LAUNCHCONF
-  aws cloudwatch delete-alarms --alarm-name  IncreaseInst DecreaseInst
-fi
 echo "All done"
 
 

@@ -97,7 +97,7 @@ $result = $s3->putObject([
 'SourceFile' => $DestPath,
 ]);
 
-$FinalS3Url=$result['ObjectURL'];
+$s3finishedurl=$result['ObjectURL'];
 
 $rds = new Aws\Rds\RdsClient([
     'version' => 'latest',
@@ -136,7 +136,7 @@ $uname = $_POST['username'];
 $email = $_POST['email'];
 $phone = $_POST['phone'];
 $s3rawurl = $url; //  $result['ObjectURL']; from above
-$s3finishedurl = "none";
+//$s3finishedurl = "none";
 $filename = basename($_FILES['userfile']['name']);
 $status =0;
 $issubscribed=0;

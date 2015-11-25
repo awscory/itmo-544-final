@@ -1,7 +1,6 @@
 <?php
 session_start();
 //require_once('/var/www/html/snssetup.php'); -- starting final project  
-//going to test image magick
 ?>
 <!DOCTYPE html>
 <meta charset="UTF-8"> 

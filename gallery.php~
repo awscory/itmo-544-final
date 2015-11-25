@@ -94,7 +94,8 @@ while($i < sizeof($imgLocations)) {
   <a href="<?php echo $imgLocations[$i] ?>"> <img src="<?php echo $imgLocations[$i] ?>"></a>
   <a href="<?php echo $imgLocations1[$i] ?>"> <img src="<?php echo $imgLocations1[$i] ?>"></a>
   </li>
-  <?php }?>
+  <?php $i++;
+	}?>
 </ul>
 
 </body>

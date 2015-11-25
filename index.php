@@ -1,13 +1,13 @@
 <?php
 session_start();
-//require_once('/var/www/html/snssetup.php'); // starting final project  
+require_once('/var/www/html/snssetup.php');   
 //going to test image magick
 ?>
 <!DOCTYPE html>
 <meta charset="UTF-8"> 
 <html>
 <body>
-<form enctype="multipart/form-data" action="imagemagick.php" method="post">
+<form enctype="multipart/form-data" action="submit.php" method="post">
 User Name: <input type="text" name="username" value="sukanya"><br>
 E-mail: <input type="text" name="email" value="****@***.iit.edu"><br>
 Phone : <input type="text" id="phone" name="phone" value="312-000-0000"><br>

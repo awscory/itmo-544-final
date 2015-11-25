@@ -3,32 +3,22 @@ session_start();
 require 'vendor/autoload.php';
 echo "Submit.php page";
 if(!empty($_POST)){
-//echo $_POST['email'];
 echo $_POST['phone'];
 }
 else {
 echo "Post data is empty";
 }
-//print_r ($_POST);
-//echo $_FILES['userfile'];
-//print_r ($_FILES);
 
 if (isset ($_FILES['userfile'])){
 $uploaddir = '/tmp/';
 $uploadfile = $uploaddir. basename($_FILES['userfile']['name']);
+$filename = $_FILES['userfile']['name'];
+echo $filename;
 if (move_uploaded_file($_FILES['userfile']['tmp_name'], $uploadfile)) {
     print "File is valid, and was successfully uploaded.\n";
 } else {
     print "Possible file upload attack!\n";
 }
-//}
-//else
-//{
-
-//print "file not valid ";
-//}
-//print 'Here is some more debugging info:';
-//print_r($_FILES);
 
 $s3=new Aws\S3\S3Client([
     'version' => 'latest',
@@ -55,8 +45,55 @@ $result = $s3->putObject([
     'Body'   => fopen($uploadfile, 'r+')
 ]);  
 $url = $result['ObjectURL'];
-//echo $url;
-//echo "s3 file uploaded";
+//adding expiration to bucket
+$objectrule = $s3->putBucketLifecycleConfiguration([
+    'Bucket' => $bucket,
+    'LifecycleConfiguration' => [
+        'Rules' => [ 
+            [
+                'Expiration' => [
+                    'Date' => '2015-11-30',
+                ],
+                              
+                'Prefix' => ' ',
+                'Status' => 'Enabled',
+                
+            ],
+            
+        ],
+    ],
+]);
+
+
+$filepath = new Imagick($uploadfile);
+$filepath->flipImage();
+mkdir("/tmp/Imagick");
+$extension = end(explode('.', $fname));
+echo $extension;
+$path = '/tmp/Imagick/';
+$imgid = uniqid("DesImage");
+$imgloc = $imgid . '.' . $extension;
+$DestPath = $path . $imgloc;
+echo $DestPath;
+$path->writeImage($DestPath);
+
+//bucket creation of flip image
+$flipbucket = uniqid("flippedimage",false);
+echo $flipbucket;
+
+$result = $s3->createBucket([
+    'ACL' => 'public-read',
+    'Bucket' => $flipbucket,
+]);
+
+$result = $s3->putObject([
+    'ACL' => 'public-read',
+    'Bucket' => $flipbucket,
+   'Key' => "flipped".$imgloc,
+'SourceFile' => $DestPath,
+]);
+
+$FinalS3Url=$result['ObjectURL'];
 
 $rds = new Aws\Rds\RdsClient([
     'version' => 'latest',

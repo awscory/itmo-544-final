@@ -19,7 +19,9 @@ Your File : <input type="file" name="userfile">
 Phone to Subscribe : <input type="text" name="phoneNo"/><br>
 Would you like to subscribe to receive message on Upload ?  <input type="submit" value="Subscribe">
 </form>
-
+<form enctype="multipart/form-data" action="introspection.php" method="post">
+Would you like to take a Database Backup  <input type="submit" value="BackUp">
+</form>
 </body>
 </html> 
 

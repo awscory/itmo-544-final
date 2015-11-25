@@ -77,8 +77,8 @@ $imgloc = $imgid . '.' . $extension;
 $DestPath = $path . $imgloc;
 echo $DestPath;
 ///tmp/Imagick/DesImage56553cb459719.png
-//$path->setImageFormat ("png");
-//file_put_contents ($DestPath, $path);
+//$filepath->setImageFormat ("png");
+//file_put_contents ($DestPath, $filepath);
 $filepath->writeImage($DestPath); 
 
 //bucket creation of flip image
@@ -106,23 +106,16 @@ $rds = new Aws\Rds\RdsClient([
 
 $result = $rds->describeDBInstances(['DBInstanceIdentifier' => 'itmo-544-sukanya']);
 
-//echo "No error as of now";
-
-//print_r($result);
 
 $endpoint = $result['DBInstances'][0]['Endpoint']['Address'];
-  //  print "============\n". $endpoint . "================";
-//echo "endpoint is available";
 
 $link = mysqli_connect($endpoint,"SukanyaN","SukanyaNDB","itmo544SNDB") or die("Error " . mysqli_error($link));
 
-//print_r($link);
 
 if (mysqli_connect_errno()) {
     printf("Connect failed: %s\n", mysqli_connect_error());
     exit();
 }
-//echo "connection success";
 $sql_insert = "INSERT INTO items (UName,Email,Phone,RawS3Url,FinalS3Url,JpgFileName,status,Issubscribed) VALUES (?,?,?,?,?,?,?,?)";
 if (!($stmt = $link->prepare($sql_insert))) {
     echo "Prepare failed: (" . $link->errno . ") " . $link->error;
@@ -136,7 +129,6 @@ $uname = $_POST['username'];
 $email = $_POST['email'];
 $phone = $_POST['phone'];
 $s3rawurl = $url; //  $result['ObjectURL']; from above
-//$s3finishedurl = "none";
 $filename = basename($_FILES['userfile']['name']);
 $status =0;
 $issubscribed=0;
@@ -144,7 +136,6 @@ $stmt->bind_param("ssssssii",$uname,$email,$phone,$s3rawurl,$s3finishedurl,$file
 if (!$stmt->execute()) {
     print "Execute failed: (" . $stmt->errno . ") " . $stmt->error;
 }
-//printf("%d Row inserted.\n", $stmt->affected_rows);
 
 $stmt->close();
 $sql1 = "SELECT topicarn,topicname FROM topic ";

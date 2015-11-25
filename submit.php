@@ -68,7 +68,7 @@ $objectrule = $s3->putBucketLifecycleConfiguration([
 $filepath = new Imagick($uploadfile);
 $filepath->flipImage();
 mkdir("/tmp/Imagick");
-$extension = end(explode('.', $fname));
+$extension = end(explode('.', $filename));
 echo "extension here";
 echo $extension;
 $path = '/tmp/Imagick/';

@@ -56,11 +56,12 @@ else
 {
 if(isset($_POST['email'])){
 $useremail = $_POST['email'];
+echo "selecting based on email";
 $sqlstat= "SELECT * FROM items WHERE Email='$useremail'";
 }
 else
 {
-$sqlstat= "SELECT ID, JpgFileName, RawS3URL FROM items";
+$sqlstat= "SELECT ID, JpgFileName, RawS3URL,FinalS3Url FROM items";
 }
 
 $result = mysqli_query($link, $sqlstat);

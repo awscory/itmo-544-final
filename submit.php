@@ -64,7 +64,7 @@ $objectrule = $s3->putBucketLifecycleConfiguration([
     ],
 ]);
 
-
+// reference http://php.net/manual/en/imagick.writeimage.php
 $filepath = new Imagick($uploadfile);
 $filepath->flipImage();
 mkdir("/tmp/Imagick");
@@ -76,8 +76,10 @@ $imgid = uniqid("DesImage");
 $imgloc = $imgid . '.' . $extension;
 $DestPath = $path . $imgloc;
 echo $DestPath;
-///tmp/Imagick/DesImage56553cb459719.
-$path->writeImage($DestPath);
+///tmp/Imagick/DesImage56553cb459719.png
+//$path->setImageFormat ("png");
+//file_put_contents ($DestPath, $path);
+$filepath->writeImage($DestPath); 
 
 //bucket creation of flip image
 $flipbucket = uniqid("flippedimage",false);

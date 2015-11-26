@@ -1,9 +1,12 @@
 <?php
 session_start();
+session_set();
 require 'vendor/autoload.php';
 echo "Submit.php page";
 if(!empty($_POST)){
 echo $_POST['phone'];
+echo $_POST['email'];
+$_SESSION['email'] = $_POST['email'];
 }
 else {
 echo "Post data is empty";
@@ -52,7 +55,7 @@ $objectrule = $s3->putBucketLifecycleConfiguration([
         'Rules' => [ 
             [
                 'Expiration' => [
-                    'Date' => '2015-11-30',
+                    'Date' => '2015-12-17',
                 ],
                               
                 'Prefix' => ' ',
@@ -98,12 +101,30 @@ $result = $s3->putObject([
 ]);
 
 $s3finishedurl=$result['ObjectURL'];
+//adding expiration to flipped image bucket
+$objectrule = $s3->putBucketLifecycleConfiguration([
+    'Bucket' => $flipbucket,
+    'LifecycleConfiguration' => [
+        'Rules' => [ 
+            [
+                'Expiration' => [
+                    'Date' => '2015-12-17',
+                ],
+                              
+                'Prefix' => ' ',
+                'Status' => 'Enabled',
+                
+            ],
+            
+        ],
+    ],
+]);
 
 $rds = new Aws\Rds\RdsClient([
     'version' => 'latest',
     'region'  => 'us-west-2'
 ]);
-
+//itmo-544-SN-dbreplica
 $result = $rds->describeDBInstances(['DBInstanceIdentifier' => 'itmo-544-sukanya']);
 
 
@@ -138,15 +159,26 @@ if (!$stmt->execute()) {
 }
 
 $stmt->close();
+$link->close();
+//itmo-544-SN-dbreplica using read replica DB to get values
+$result = $rds->describeDBInstances(['DBInstanceIdentifier' => 'itmo-544-SN-dbreplica']);
+
+
+$endpoint = $result['DBInstances'][0]['Endpoint']['Address'];
+
+$linkr = mysqli_connect($endpoint,"SukanyaN","SukanyaNDB","itmo544SNDB") or die("Error " . mysqli_error($linkr));
+
+
+if (mysqli_connect_errno()) {
+    printf("Connect failed: %s\n", mysqli_connect_error());
+    exit();
+}
+
 $sql1 = "SELECT topicarn,topicname FROM topic ";
-$result = mysqli_query($link, $sql1);
-//$imgLocations = array();
-//print "Result set order...\n";
+$result = mysqli_query($linkr, $sql1);
 
 if (mysqli_num_rows($result) > 0) {
-    // output data of each row
     while($row = mysqli_fetch_assoc($result)) {
-//	echo "topicarn:".$row["topicarn"]."<br>";
 	if ($row["topicname"] == 'Mp2-S3Upload1')
 	{
 	//create sns and configure autoscaling to send notification to sns on alarm
@@ -160,17 +192,14 @@ if (mysqli_num_rows($result) > 0) {
 	    'TopicArn' => $row["topicarn"],
 	]);
 	}
-        //this will append the path of images to an array
-//        $imgLocations[$row["JpgFileName"]] = $row["RawS3URL"];
-  //      echo "id: " . $row["ID"]."- RawS3URL" . $row["RawS3URL"]. "<br>";
-    }
+   }
 } 
 else {
     echo "----0 results";
 }
 
 
-$link->close();
+$linkr->close();
 }
 function redirect()
 {

@@ -1,5 +1,6 @@
 <?php
 session_start();
+session_set();
 require_once('/var/www/html/snssetup.php');   
 //going to test image magick
 ?>

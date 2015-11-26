@@ -23,7 +23,6 @@ $table_name = "items";
    $backup_file  = '/var/backups/items'.date("Y-m-d-H-i-s").'.sql';
    $sql = "SELECT * INTO OUTFILE '$backup_file' FROM $table_name";
    
-   mysql_select_db('itmo544SNDB');
    $retval = mysql_query( $sql, $conn );
    
    if(! $retval )

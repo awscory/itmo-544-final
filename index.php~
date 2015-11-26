@@ -22,6 +22,7 @@ Would you like to subscribe to receive message on Upload ?  <input type="submit"
 <form enctype="multipart/form-data" action="introspection.php" method="post">
 Would you like to take a Database Backup  <input type="submit" value="BackUp">
 </form>
+<a href="gallery.php"> Gallery</a>
 </body>
 </html> 
 

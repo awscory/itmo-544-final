@@ -27,7 +27,7 @@ $table_name = "items";
    
    if(! $retval )
    {
-      die('Could not take data backup: ' . mysql_error());
+      die('Could not take data backup: ' . mysql_error($link));
    }
  mysql_close($link);
 echo "Database Backup was successful";

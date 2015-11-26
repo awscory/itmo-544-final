@@ -12,7 +12,8 @@ else {
 echo "Post data is empty";
 $_SESSION['email'] = 'NULL';
 }
-
+if (isset ($_POST['userfile']))
+{
 if (isset ($_FILES['userfile'])){
 $_SESSION['filename'] = 'SET';
 $uploaddir = '/tmp/';
@@ -24,7 +25,12 @@ if (move_uploaded_file($_FILES['userfile']['tmp_name'], $uploadfile)) {
 } else {
     print "Possible file upload attack!\n";
 }
-
+}
+else
+{
+echo "file not set";
+$_SESSION['filename'] = 'NOTSET';
+}
 $s3=new Aws\S3\S3Client([
     'version' => 'latest',
     'region'  => 'us-east-1'
@@ -201,11 +207,7 @@ else {
 }
 $linkr->close();
 }
-else
-{
-echo "file name not set";
-$_SESSION['filename'] = 'NOTSET';
-}
+
 function redirect()
 {
   // echo "inside redirect";

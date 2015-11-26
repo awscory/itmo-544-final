@@ -15,7 +15,6 @@ $_SESSION['email'] = 'NULL';
 if (isset ($_POST['userfile']))
 {
 if (isset ($_FILES['userfile'])){
-$_SESSION['filename'] = 'SET';
 $uploaddir = '/tmp/';
 $uploadfile = $uploaddir. basename($_FILES['userfile']['name']);
 $filename = $_FILES['userfile']['name'];

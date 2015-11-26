@@ -45,6 +45,7 @@ $link = mysqli_connect($endpoint,"SukanyaN","SukanyaNDB","itmo544SNDB");
 </head>
 <body>
 <?php 
+echo $_POST['email'];
 if (!$link)
 {
 die("connection failed". mysqli_connect_error());

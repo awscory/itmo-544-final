@@ -1,6 +1,5 @@
 <?php
 session_start();
-session_set();
 require 'vendor/autoload.php';
 
 #create RDSclient using the us-west-2 

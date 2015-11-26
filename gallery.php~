@@ -1,6 +1,6 @@
 <?php
 session_start();
-session_set();
+
 require 'vendor/autoload.php';
 
 #create RDSclient using the us-west-2 
@@ -61,7 +61,7 @@ $sqlstat= "SELECT ID, JpgFileName, RawS3URL,FinalS3Url FROM items WHERE Email='$
 }
 else
 {
-echo "enter email id to view the Finishes image";
+echo "enter email id to view the Finished flip image";
 $sqlstat= "SELECT ID, JpgFileName, RawS3URL FROM items";
 }
 

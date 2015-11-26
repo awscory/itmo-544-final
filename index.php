@@ -1,6 +1,5 @@
 <?php
 session_start();
-session_set();
 require_once('/var/www/html/snssetup.php');   
 //going to test image magick
 ?>
@@ -25,6 +24,12 @@ Would you like to take a Database Backup  <input type="submit" value="BackUp">
 </form>
 </body>
 </html> 
+<?php
+$_SESSION['email'] = $_POST['email'];
+$_SESSION['username'] = $_POST['username'];
+$_SESSION['phone'] = $_POST['phone'];
+$_SESSION['phoneNo'] = $_POST['phoneNo'];
+?>
 
 
 

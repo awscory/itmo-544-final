@@ -53,7 +53,7 @@ else
 //check if the email id is set 
 {
 if(isset($_SESSION['filename']) && $_SESSION['filename'] != 'SET'){
-$useremail = $_SESSION['email'];
+$useremail = $_POST['email'];
 echo "your email id is ";
 echo $_SESSION['email'];
 $sqlstat= "SELECT ID, JpgFileName, RawS3URL,FinalS3Url FROM items WHERE Email='$useremail'";

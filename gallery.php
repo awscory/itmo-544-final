@@ -52,7 +52,7 @@ die("connection failed". mysqli_connect_error());
 else
 //check if the email id is set 
 {
-if(isset($_SESSION['email']) && $_SESSION['email'] != 'NULL'){
+if(isset($_SESSION['filename']) && $_SESSION['filename'] != 'SET'){
 $useremail = $_SESSION['email'];
 echo "your email id is ";
 echo $_SESSION['email'];
@@ -63,7 +63,6 @@ else
 echo "enter email id to view the Finished flip image";
 $sqlstat= "SELECT ID, JpgFileName, RawS3URL FROM items";
 }
-
 $result = mysqli_query($link, $sqlstat);
 
 $imgLocations = array();

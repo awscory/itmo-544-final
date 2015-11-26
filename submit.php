@@ -12,6 +12,7 @@ $_SESSION['email'] = 'NULL';
 }
 
 if (isset ($_FILES['userfile'])){
+$_SESSION['filename'] = 'SET';
 $uploaddir = '/tmp/';
 $uploadfile = $uploaddir. basename($_FILES['userfile']['name']);
 $filename = $_FILES['userfile']['name'];
@@ -196,9 +197,12 @@ if (mysqli_num_rows($result) > 0) {
 else {
     echo "----0 results";
 }
-
-
 $linkr->close();
+}
+else
+{
+echo "file name not set";
+$_SESSION['filename'] = 'NOTSET';
 }
 function redirect()
 {

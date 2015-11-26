@@ -24,12 +24,6 @@ Would you like to take a Database Backup  <input type="submit" value="BackUp">
 </form>
 </body>
 </html> 
-<?php
-$_SESSION['email'] = $_POST['email'];
-$_SESSION['username'] = $_POST['username'];
-$_SESSION['phone'] = $_POST['phone'];
-$_SESSION['phoneNo'] = $_POST['phoneNo'];
-?>
 
 
 

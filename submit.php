@@ -2,8 +2,7 @@
 session_start();
 require 'vendor/autoload.php';
 echo "Submit.php page";
-if(!empty($_POST)){
-echo $_POST['phone'];
+if(!empty($_POST['email'])){
 echo $_POST['email'];
 $_SESSION['email'] = $_POST['email'];
 }

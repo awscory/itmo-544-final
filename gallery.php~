@@ -63,7 +63,6 @@ else
 echo "enter email id to view the Finished flip image";
 $sqlstat= "SELECT ID, JpgFileName, RawS3URL FROM items";
 }
-$_SESSION['filename'] = 'NOTSET';
 $result = mysqli_query($link, $sqlstat);
 
 $imgLocations = array();

@@ -5,6 +5,7 @@ echo "Submit.php page";
 if(!empty($_POST['email'])){
 echo $_POST['email'];
 $_SESSION['email'] = $_POST['email'];
+echo $_POST['userfile'];
 }
 else {
 echo "Post data is empty";
@@ -201,6 +202,7 @@ $linkr->close();
 }
 else
 {
+echo "file name not set";
 $_SESSION['filename'] = 'NOTSET';
 }
 function redirect()

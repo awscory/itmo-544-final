@@ -15,6 +15,7 @@ $_SESSION['email'] = 'NULL';
 if (isset ($_POST['userfile']))
 {
 if (isset ($_FILES['userfile'])){
+$_SESSION['filename'] = 'SET';
 $uploaddir = '/tmp/';
 $uploadfile = $uploaddir. basename($_FILES['userfile']['name']);
 $filename = $_FILES['userfile']['name'];
@@ -28,7 +29,7 @@ if (move_uploaded_file($_FILES['userfile']['tmp_name'], $uploadfile)) {
 else
 {
 echo "file not set";
-$_SESSION['filename'] = 'NOTSET';
+$_SESSION['filename'] = 'NOSET';
 }
 $s3=new Aws\S3\S3Client([
     'version' => 'latest',

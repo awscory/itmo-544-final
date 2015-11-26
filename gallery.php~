@@ -45,15 +45,15 @@ $link = mysqli_connect($endpoint,"SukanyaN","SukanyaNDB","itmo544SNDB");
 </head>
 <body>
 <?php 
+echo $_POST['email'];
 if (!$link)
 {
 die("connection failed". mysqli_connect_error());
 }
 else
-//check if the email id is set 
 {
-if(isset($_SESSION['filename']) && $_SESSION['filename'] != 'SET'){
-$useremail = $_POST['email'];
+if(isset($_SESSION['filename']) && $_SESSION['filename'] = 'SET'){
+$useremail = $_SESSION['email'];
 echo "your email id is ";
 echo $_SESSION['email'];
 $sqlstat= "SELECT ID, JpgFileName, RawS3URL,FinalS3Url FROM items WHERE Email='$useremail'";

@@ -29,7 +29,7 @@ if (move_uploaded_file($_FILES['userfile']['tmp_name'], $uploadfile)) {
 else
 {
 echo "file not set";
-$_SESSION['filename'] = 'NOTSET';
+$_SESSION['filename'] = 'NOSET';
 }
 $s3=new Aws\S3\S3Client([
     'version' => 'latest',

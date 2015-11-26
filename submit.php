@@ -8,6 +8,7 @@ $_SESSION['email'] = $_POST['email'];
 }
 else {
 echo "Post data is empty";
+$_SESSION['email'] = 'NULL';
 }
 
 if (isset ($_FILES['userfile'])){

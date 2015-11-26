@@ -52,7 +52,7 @@ die("connection failed". mysqli_connect_error());
 else
 //check if the email id is set 
 {
-if(isset($_SESSION['email'])){
+if(isset($_SESSION['email']) && $_SESSION['email'] != 'NULL'){
 $useremail = $_SESSION['email'];
 echo "your email id is ";
 echo $_SESSION['email'];

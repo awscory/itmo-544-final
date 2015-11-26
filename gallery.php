@@ -1,7 +1,8 @@
 <?php
 session_start();
 require 'vendor/autoload.php';
-
+echo "user file here";
+echo $_SESSION['filename'];
 #create RDSclient using the us-west-2 
 $rds = new Aws\Rds\RdsClient([
     'version' => 'latest',
@@ -52,7 +53,7 @@ die("connection failed". mysqli_connect_error());
 }
 else
 {
-if(isset($_SESSION['filename']) && $_SESSION['filename'] != 'NOSET'){
+if($_SESSION['filename'] != 'NOSET'){
 $useremail = $_SESSION['email'];
 echo "your email id is ";
 echo $_SESSION['email'];

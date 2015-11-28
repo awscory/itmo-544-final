@@ -1,5 +1,4 @@
 <?php
-session_start();
 require 'vendor/autoload.php';
 //Creating a Backup of the RDS database
 //http://www.tutorialspoint.com/php/perform_mysql_backup_php.htm
@@ -23,7 +22,7 @@ $table_name = "items";
    $backup_file  = '/var/backups/items'.date("Y-m-d-H-i-s").'.sql';
    $sql = "SELECT * INTO OUTFILE '$backup_file' FROM $table_name";
    
-   $retval = mysql_query( $sql, $conn );
+   $retval = mysql_query( $sql, $link );
    
    if(! $retval )
    {

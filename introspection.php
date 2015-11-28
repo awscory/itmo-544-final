@@ -18,7 +18,9 @@ $dbname = 'itmo544SNDB';
 $dbuser = 'SukanyaN';
 $dbpass = 'SukanyaNDB';
 
-$Bkpspath = '/var/backups/';
+mkdir("/tmp/Backup");
+
+$Bkpspath = '/tmp/Backup/';
 $bname = uniqid("DBBackUp", false);
 $append = $bname . '.' . sql;
 $Path = $Bkpspath . $append;

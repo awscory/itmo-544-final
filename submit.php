@@ -4,7 +4,7 @@ require 'vendor/autoload.php';
 echo "Submit.php page";
 if(!empty($_POST['email'])){
 echo $_POST['email'];
-$_SESSION['email'] = $_POST['email']
+$_SESSION['email'] = $_POST['email'];
 echo "file name here";
 echo $_POST['userfile'];
 }

@@ -52,9 +52,9 @@ die("connection failed". mysqli_connect_error());
 else
 {
 if(isset($_SESSION['email']) && $_GET['raw'] != 'true'){
-$useremail = $_POST['email'];
+$useremail = $_SESSION['email'];
 echo "your email id is ";
-echo $_POST['email'];
+echo $_SESSION['email'];
 $sqlstat= "SELECT ID, JpgFileName, RawS3URL,FinalS3Url FROM items WHERE Email='$useremail'";
 unset($_SESSION['email']);
 }

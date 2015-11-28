@@ -212,7 +212,7 @@ function redirect()
    <?php
    die();
 }
-//redirect(); 
+redirect(); 
 
 ?>
 

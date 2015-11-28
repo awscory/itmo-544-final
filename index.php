@@ -67,7 +67,7 @@ require_once('/var/www/html/snssetup.php');
 								<input class="form-control" type="hidden" name="MAX_FILE_SIZE" value="3000000">
 								Your File :  <input type="file" name="userfile"> 
 								</div>
-								<button type="submit" value="Upload"/><span class="glyphicon glyphicon-upload"></span>Upload
+								<input type="submit" value="Upload"/><span class="glyphicon glyphicon-upload"></span>Upload
 							</form>
 					</div>
 					<div class="col-lg-12">

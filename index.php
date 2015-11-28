@@ -53,7 +53,7 @@ require_once('/var/www/html/snssetup.php');
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-lg-12">
-                        <form class="well" "enctype="multipart/form-data" action="submit.php" method="post">
+                        <form class="well" enctype="multipart/form-data" action="submit.php" method="post">
 								<div class="form-group">
 									User Name: <input class="form-control" type="text" name="username" value="sukanya"/>
 								</div>

@@ -22,7 +22,7 @@ $table_name = "items";
    $backup_file  = '/var/backups/items'.date("Y-m-d-H-i-s").'.sql';
    $sql = "SELECT * INTO OUTFILE '$backup_file' FROM $table_name";
    
-   $retval = mysql_query( $sql, $link );
+   $retval = mysql_query( $link, $sql );
    
    if(! $retval )
    {

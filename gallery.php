@@ -92,12 +92,16 @@ while($i < sizeof($imgLocations)) {
   ?>
   <li>	
   <a href="<?php echo $imgLocations[$i] ?>"> <img src="<?php echo $imgLocations[$i] ?>"></a>
-  <a href="<?php echo $imgLocations1[$i] ?>"> <img src="<?php echo $imgLocations1[$i] ?>"></a>
+  <?php
+  	 if($_GET['raw'] != 'true') {
+  	 ?>
+  	<a href="<?php echo $imgLocations1[$i] ?>"> <img src="<?php echo $imgLocations1[$i] ?>"></a>
+  <?php } ?>
   </li>
   <?php $i++;
 	}?>
 </ul>
-
+<a href="index.php">Main Page </a>
 </body>
 
 <!-- jQuery 1.7.2+ or Zepto.js 1.0+ -->

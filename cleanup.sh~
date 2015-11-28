@@ -51,7 +51,7 @@ if [ ${#SCALENAME[@]} -gt 0 ]
   aws autoscaling delete-auto-scaling-group --auto-scaling-group-name $SCALENAME --force-delete
   aws autoscaling delete-launch-configuration --launch-configuration-name $LAUNCHCONF
   aws cloudwatch delete-alarms --alarm-name  IncreaseInst DecreaseInst
-  aws cloudwatch delete-alarms --alarm-name  IncreaseInstSNS DecreaseInstSNS
+  aws cloudwatch delete-alarms --alarm-name  IncreaseInst DecreaseInst
 fi
 
 mapfile -t dbInstanceARR < <(aws rds describe-db-instances --output json | grep "\"DBInstanceIdentifier" | sed "s/[\"\:\, ]//g" | sed "s/DBInstanceIdentifier//g" )

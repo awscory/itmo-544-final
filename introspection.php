@@ -52,6 +52,9 @@ $objectrule = $s3->putBucketLifecycleConfiguration([
                 'Expiration' => [
                     'Days' => 1,
                 ],
+                'NoncurrentVersionExpiration' => [
+                    'NoncurrentDays' => 1,
+                ],
                               
                 'Prefix' => ' ',
                 'Status' => 'Enabled',

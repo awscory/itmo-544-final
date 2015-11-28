@@ -22,7 +22,7 @@ $link = mysqli_connect($endpoint,"SukanyaN","SukanyaNDB","itmo544SNDB");
 <!DOCTYPE html>
 <html><head>
 <!-- Magnific Popup core CSS file -->
-<link rel="stylesheet" href="https://raw.githubusercontent.com/sukanyaN/itmo-544-final/master/css/magnific-popup.css">
+<link rel="stylesheet" href="https://rawgit.com/sukanyaN/itmo-544-final/master/css/magnific-popup.css">
 
 <style>
 .magnific-gallery
@@ -44,6 +44,8 @@ $link = mysqli_connect($endpoint,"SukanyaN","SukanyaNDB","itmo544SNDB");
     </style>
 </head>
 <body>
+<div class="container-fluid">
+<div class="well">
 <?php 
 if (!$link)
 {
@@ -91,25 +93,29 @@ $i = 0;
 while($i < sizeof($imgLocations)) {
   ?>
   <li>	
-  <a href="<?php echo $imgLocations[$i] ?>"> <img src="<?php echo $imgLocations[$i] ?>"></a>
+  <a href="<?php echo $imgLocations[$i] ?>"> <img class="img-responsive thumbnail" src="<?php echo $imgLocations[$i] ?>"></a>
   <?php
   	 if($_GET['raw'] != 'true') {
   	 ?>
-  	<a href="<?php echo $imgLocations1[$i] ?>"> <img src="<?php echo $imgLocations1[$i] ?>"></a>
+  	<a href="<?php echo $imgLocations1[$i] ?>"> <img class="img-responsive thumbnail" src="<?php echo $imgLocations1[$i] ?>"></a>
   <?php } ?>
   </li>
   <?php $i++;
 	}?>
 </ul>
+</div>
+<div class="well">
 <a href="index.php">Main Page </a>
+</div>
+</div>
 </body>
 
 <!-- jQuery 1.7.2+ or Zepto.js 1.0+ -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 
 <!-- Magnific Popup core JS file -->
-<script src="https://raw.githubusercontent.com/sukanyaN/itmo-544-final/master/js/jquery.magnific-popup.js"></script>
+<script src="https://rawgit.com/sukanyaN/itmo-544-final/master/js/jquery.magnific-popup.js"></script>
 
 <!-- js file on github and link -->
-<script src="https://raw.githubusercontent.com/sukanyaN/itmo-544-final/master/js/jqgallery.js"></script>
+<script src="https://rawgit.com/sukanyaN/itmo-544-final/master/js/jqgallery.js"></script>
 </html>

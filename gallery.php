@@ -1,9 +1,8 @@
 <?php
 session_start();
 require 'vendor/autoload.php';
-echo "user file here";
-echo $_SESSION['filename'];
 #create RDSclient using the us-west-2 
+echo $_GET['raw'];
 $rds = new Aws\Rds\RdsClient([
     'version' => 'latest',
     'region'  => 'us-west-2'
@@ -53,10 +52,10 @@ die("connection failed". mysqli_connect_error());
 }
 else
 {
-if($_SESSION['filename'] != 'NOSET'){
-$useremail = $_SESSION['email'];
+if(isset($_POST['email'])){
+$useremail = $_POST['email'];
 echo "your email id is ";
-echo $_SESSION['email'];
+echo $_POST['email'];
 $sqlstat= "SELECT ID, JpgFileName, RawS3URL,FinalS3Url FROM items WHERE Email='$useremail'";
 }
 else

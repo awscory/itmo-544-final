@@ -55,20 +55,20 @@ require_once('/var/www/html/snssetup.php');
                     <div class="col-lg-12">
                         <form role="form" "enctype="multipart/form-data" action="submit.php" method="post">
 								<div class="form-group">
-									User Name: <input class="form-control" type="text" name="username" value="sukanya">
+									User Name: <input class="form-control" type="text" name="username" value="sukanya"/>
 								</div>
 								<div class="form-group">
-								E-mail: <input class="form-control" type="text" name="email">
+								E-mail: <input class="form-control" type="text" name="email"/>
 								</div>
 								<div class="form-group">
-								Phone : <input class="form-control" type="text" id="phone" name="phone">
+								Phone : <input class="form-control" type="text" id="phone" name="phone"/>
 								</div>
 								<div class="form-group">
-								<input class="form-control" type="hidden" name="MAX_FILE_SIZE" value="3000000">
-								Your File :  <input type="file" name="userfile"> 
+								<input class="form-control" type="hidden" name="MAX_FILE_SIZE" value="3000000"/>
+								Your File :  <input type="file" name="userfile"/> 
 								</div>
 								<div class="form-group">
-								<input type="submit" value="Upload"/><span class="glyphicon glyphicon-upload"></span>Upload
+									<input type="submit" name="submit" value="Upload"/>
 								</div>
 							</form>
 					</div>

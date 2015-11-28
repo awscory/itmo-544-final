@@ -17,10 +17,10 @@ require_once('/var/www/html/snssetup.php');
     <title>Simple Sidebar - Start Bootstrap Template</title>
 
     <!-- Bootstrap Core CSS -->
-    <link href="https://raw.githubusercontent.com/sukanyaN/itmo-544-final/master/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://rawgit.com/sukanyaN/itmo-544-final/master/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Custom CSS -->
-    <link href="https://raw.githubusercontent.com/sukanyaN/itmo-544-final/master/css/simple-sidebar.css" rel="stylesheet">
+    <link href="https://rawgit.com/sukanyaN/itmo-544-final/master/css/simple-sidebar.css" rel="stylesheet">
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -68,7 +68,7 @@ require_once('/var/www/html/snssetup.php');
 								Your File :  <input type="file" name="userfile"> 
 								</div>
 								<div class="form-group">
-								<input type="submit" value="Upload"/><span class="glyphicon glyphicon-upload"></span>Upload
+									<input type="submit" name="submit" value="Upload"/>
 								</div>
 							</form>
 					</div>
@@ -101,10 +101,10 @@ require_once('/var/www/html/snssetup.php');
     <!-- /#wrapper -->
 
     <!-- jQuery -->
-    <script src="https://raw.githubusercontent.com/sukanyaN/itmo-544-final/master/js/jquery.js"></script>
+    <script src="https://rawgit.com/sukanyaN/itmo-544-final/master/js/jquery.js"></script>
 
     <!-- Bootstrap Core JavaScript -->
-    <script src="https://raw.githubusercontent.com/sukanyaN/itmo-544-final/master/js/bootstrap.min.js"></script>
+    <script src="https://rawgit.com/sukanyaN/itmo-544-final/master/js/bootstrap.min.js"></script>
 
     <!-- Menu Toggle Script -->
     

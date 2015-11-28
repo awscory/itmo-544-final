@@ -35,7 +35,7 @@ if (mysqli_num_rows($result) > 0) {
 	echo "topicarn:".$row["topicarn"]."<br>";
 	if ($row["topicname"] == 'Mp2-S3Upload1')
 	{
-	echo "topic already exist";
+	echo "";
 	}
 	else
 	{
@@ -60,11 +60,7 @@ if (mysqli_num_rows($result) > 0) {
 	if (!($stmt = $link->prepare($sql_insert))) {
 	    echo "Prepare failed: (" . $link->errno . ") " . $link->error;
 	}
-	else
-	{
-	echo "statement topic was success";
-	}
-
+	
 	$stmt->bind_param("ss",$topicarn,$topicName);
 	if (!$stmt->execute()) {
 	    print "Execute failed: (" . $stmt->errno . ") " . $stmt->error;
@@ -97,17 +93,12 @@ else {
 	if (!($stmt = $link->prepare($sql_insert))) {
 	    echo "Prepare failed: (" . $link->errno . ") " . $link->error;
 	}
-	else
-	{
-	echo "statement topic was success";
-	}
-
+	
 	$stmt->bind_param("ss",$topicarn,$topicName);
 	if (!$stmt->execute()) {
 	    print "Execute failed: (" . $stmt->errno . ") " . $stmt->error;
 	}
-	printf("%d Row inserted.\n", $stmt->affected_rows);
-
+	
 	$stmt->close();
 }
 

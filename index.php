@@ -101,10 +101,10 @@ require_once('/var/www/html/snssetup.php');
     <!-- /#wrapper -->
 
     <!-- jQuery -->
-    <script src="https://raw.githubusercontent.com/sukanyaN/itmo-544-final/master/js/jquery.js"></script>
+    <script src="https://rawgit.com/sukanyaN/itmo-544-final/master/js/jquery.js"></script>
 
     <!-- Bootstrap Core JavaScript -->
-    <script src="https://raw.githubusercontent.com/sukanyaN/itmo-544-final/master/js/bootstrap.min.js"></script>
+    <script src="https://rawgit.com/sukanyaN/itmo-544-final/master/js/bootstrap.min.js"></script>
 
     <!-- Menu Toggle Script -->
     

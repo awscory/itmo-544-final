@@ -18,17 +18,31 @@ $dbname = 'itmo544SNDB';
 $dbuser = 'SukanyaN';
 $dbpass = 'SukanyaNDB';
 
-$table_name = "items";
-   $backup_file  = '/var/backups/items'.date("Y-m-d-H-i-s").'.sql';
-   $sql = "SELECT * INTO OUTFILE '$backup_file' FROM $table_name";
-   
-   $retval = mysqli_query( $link, $sql );
-   
-   if(mysqli_num_rows($retval) = 0)
-   {
-      die('Could not take data backup: ' . mysql_error($link));
-   }
- mysql_close($link);
+$Bkpspath = '/tmp/DBbkps/';
+$bname = uniqid("DBBackUp", false);
+$append = $bname . '.' . sql;
+$Path = $Bkpspath . $append;
+$sql="mysqldump --user=$dbuser --password=$dbpass --host=$endpoint $dbname > $Path";
+exec($sql);
+$bucketname = uniqid("dbbackup", false);
+
+$s3 = new Aws\S3\S3Client([
+    'version' => 'latest',
+    'region'  => 'us-west-2'
+]);
+# AWS PHP SDK version 3 create bucket
+$result = $s3->createBucket([
+    'ACL' => 'public-read',
+    'Bucket' => $bucketname,
+]);
+# PHP version 3
+$result = $s3->putObject([
+    'ACL' => 'public-read',
+    'Bucket' => $bucketname,
+   'Key' => $append,
+'SourceFile' => $Path,
+]);
+mysql_close($link);
 echo "Database Backup was successful";
 ?>
 <!DOCTYPE html>

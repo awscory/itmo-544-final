@@ -4,15 +4,13 @@ require 'vendor/autoload.php';
 echo "Submit.php page";
 if(!empty($_POST['email'])){
 echo $_POST['email'];
-$_SESSION['email'] = $_POST['email'];
+$_SESSION['email'] = $_POST['email']
 echo "file name here";
 echo $_POST['userfile'];
 }
 else {
 echo "Post data is empty";
 }
-if (isset ($_POST['userfile']))
-{
 if (isset ($_FILES['userfile'])){
 
 $uploaddir = '/tmp/';
@@ -23,7 +21,6 @@ if (move_uploaded_file($_FILES['userfile']['tmp_name'], $uploadfile)) {
     print "File is valid, and was successfully uploaded.\n";
 } else {
     print "Possible file upload attack!\n";
-}
 }
 
 $s3=new Aws\S3\S3Client([

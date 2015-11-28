@@ -45,14 +45,13 @@ $link = mysqli_connect($endpoint,"SukanyaN","SukanyaNDB","itmo544SNDB");
 </head>
 <body>
 <?php 
-echo $_POST['email'];
 if (!$link)
 {
 die("connection failed". mysqli_connect_error());
 }
 else
 {
-if(isset($_POST['email'])){
+if(isset($_POST['email']) && $_GET['raw'] != 'true'){
 $useremail = $_POST['email'];
 echo "your email id is ";
 echo $_POST['email'];

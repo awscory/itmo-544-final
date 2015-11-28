@@ -18,7 +18,7 @@ $dbname = 'itmo544SNDB';
 $dbuser = 'SukanyaN';
 $dbpass = 'SukanyaNDB';
 
-$Bkpspath = '/tmp/DBbkps/';
+$Bkpspath = '/var/backups/';
 $bname = uniqid("DBBackUp", false);
 $append = $bname . '.' . sql;
 $Path = $Bkpspath . $append;
@@ -41,6 +41,23 @@ $result = $s3->putObject([
     'Bucket' => $bucketname,
    'Key' => $append,
 'SourceFile' => $Path,
+]);
+$objectrule = $s3->putBucketLifecycleConfiguration([
+    'Bucket' => $bucketname,
+    'LifecycleConfiguration' => [
+        'Rules' => [ 
+            [
+                'Expiration' => [
+                    'Days' => 1,
+                ],
+                              
+                'Prefix' => ' ',
+                'Status' => 'Enabled',
+                
+            ],
+            
+        ],
+    ],
 ]);
 mysql_close($link);
 echo "Database Backup was successful";
